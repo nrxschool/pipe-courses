@@ -26,7 +26,7 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 
 ## Módulo 3 [Web3.py v7.x]
 
-- [x] Como criar carteiras
+- [ ] Como criar carteiras
 - [ ] Como assinar mensagem
 - [ ] Lendo saldos da blockchain
 - [ ] Lendo dados de transações
