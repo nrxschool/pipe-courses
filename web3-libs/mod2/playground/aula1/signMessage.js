@@ -22,7 +22,7 @@ const signMessage = async () => {
     console.log("Signature:", signature.signature);
 
     // Verify the signature
-    const verify = await web3.eth.accounts.recover(message, signature.signature);
+    const verify = await web3.eth.accounts.recover("outra messagem", signature.signature);
     console.log("Verification:", verify === account.address ? "Success" : "Failed");
   });
 };

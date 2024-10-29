@@ -44,5 +44,7 @@ const decryptKeystore = (keystore) => {
   });
 };
 
+cons0x4975335475faf2b75db302205b61f95c7a59dc73818e646ee6c05f77cc8db652
+
 // Inicia o processo
 encryptPrivateKey();
