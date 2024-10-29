@@ -1,150 +1,144 @@
-# Aula 3: Lendo Dados de Transações
+# Aula 1: Como criar carteiras com Web3.py
 
 ## Abertura
 
-Bem-vindo à terceira aula sobre a biblioteca **Web3.js**. Hoje, vamos aprender a extrair informações detalhadas de transações na blockchain. Entender os dados das transações é essencial para monitorar, validar e auditar interações, além de ser uma base importante para desenvolvimento e análise de smart contracts. Nesta aula, vamos explorar os métodos que a **Web3.js** nos oferece para consultar e analisar transações específicas.
+Bem-vindo à primeira aula prática do Módulo 2, onde aprenderemos sobre **Web3.py** e seu uso na criação e gerenciamento de carteiras e assinaturas de mensagens. O Web3.py é uma das bibliotecas mais usadas para conectar aplicações à blockchain Ethereum, e nesta aula, vamos focar na criação de carteiras e assinaturas digitais.
 
 ### Programa da aula:
 
-1. Obtendo uma transação pelo hash
-2. Analisando os dados da transação
-3. Lendo o recibo de uma transação
-4. Analisando logs no recibo
+1. Como instalar a Web3.py
+2. Criando carteiras com Web3.py
+3. Assinando mensagens digitalmente
+
+Ao final desta aula, você será capaz de configurar a Web3.py no seu ambiente, criar carteiras e gerar assinaturas seguras para interagir com a blockchain.
 
 ---
 
-## 1. Obtendo uma Transação pelo Hash
+## 1. Como instalar a Web3.py
 
-O primeiro passo para ler uma transação é saber como acessá-la através de seu **hash**, que é um identificador único gerado após cada transação. Vamos usar o método `getTransaction`.
+Para começar, vamos instalar a versão mais recente do Web3.py.
 
-```javascript
-// Exemplo de código para obter uma transação
-const Web3 = require("web3");
-const web3 = new Web3("https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID");
+### Passo a Passo de Instalação
 
-async function getTransaction(txHash) {
-  const transaction = await web3.eth.getTransaction(txHash);
-  console.log(transaction);
-}
+1. **Pré-requisitos**: Certifique-se de ter o **Python** e o **pip** instalados.
 
-getTransaction("0xTransactionHash");
+2. **Instalando o Web3.py**:
+
+```bash
+pip install web3
 ```
-
-### Dados Retornados
-
-O método `getTransaction` retorna vários dados importantes, como:
-
-- **blockHash**: hash do bloco onde a transação foi registrada.
-- **from** e **to**: endereços do remetente e destinatário.
-- **value**: valor enviado na transação (em wei).
-- **gasPrice**: preço do gás da transação.
-- **input**: dados adicionais, como calldata (para chamadas de contratos).
 
 ---
 
-## 2. Analisando os Dados da Transação
+## 2. Criando Carteiras com Web3.py
 
-Depois de acessar uma transação, podemos examinar cada campo. Esses dados são valiosos para compreender a ação realizada e o custo associado.
+Para gerenciar uma conta na blockchain, é necessário criar uma carteira, composta por uma chave pública e uma chave privada.
 
-Exemplo de dados comuns em uma transação:
+### Exemplo 1: Criação de Carteira Aleatória
 
-```javascript
-{
-    blockHash: "0x123abc...",
-    blockNumber: 12345678,
-    from: "0xFromAddress",
-    to: "0xToAddress",
-    gas: 21000,
-    gasPrice: "10000000000", // Em wei
-    hash: "0xTransactionHash",
-    input: "0x...",
-    nonce: 1,
-    transactionIndex: 0,
-    value: "1000000000000000000" // Em wei
-}
+Para criar uma carteira aleatória (ou seja, uma conta com uma chave pública e uma chave privada), podemos usar a função `Account.create()` do Web3.py.
+
+```python
+from web3 import Web3
+from eth_account import Account
+
+# Cria uma conta aleatória
+random_account = Account.create()
+
+# Exibe a chave pública e privada
+print("Endereço (chave pública):", random_account.address)
+print("Chave privada:", random_account.key.hex())
 ```
 
-### Explicando Campos Específicos
+### Exemplo 2: Importando Carteira de uma Chave Privada
 
-- **input**: No caso de uma transação para um contrato, contém o calldata.
-- **nonce**: número que identifica a ordem da transação do remetente.
-- **transactionIndex**: posição da transação no bloco.
+Se você já possui uma chave privada, é possível gerar uma carteira com essa chave.
+
+```python
+from eth_account import Account
+
+# Insira a chave privada aqui (exemplo fictício)
+private_key = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+imported_account = Account.from_key(private_key)
+
+# Exibe o endereço da conta
+print("Endereço:", imported_account.address)
+```
+
+### Exemplo 3: Armazenando Carteiras
+
+Podemos armazenar as informações da carteira de forma segura usando keystores. O keystore permite proteger a chave privada com uma senha.
+
+```python
+from eth_account import Account
+import json
+
+# Gera uma conta aleatória
+account = Account.create()
+
+# Define uma senha para proteger o keystore
+password = "minha_senha_segura"
+
+# Cria o keystore criptografado
+keystore = Account.encrypt(account.key, password)
+
+# Salva o keystore em um arquivo JSON
+with open("keystore.json", "w") as file:
+    json.dump(keystore, file)
+
+print("Keystore salvo com sucesso!")
+```
 
 ---
 
-## 3. Lendo o Recibo de uma Transação
+## 3. Assinando Mensagens
 
-Um recibo de transação contém informações detalhadas sobre o que aconteceu após a execução da transação. O método `getTransactionReceipt` fornece detalhes como status e consumo total de gás.
+Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. Esse processo cria uma assinatura digital única usando a chave privada da conta.
 
-```javascript
-async function getTransactionReceipt(txHash) {
-  const receipt = await web3.eth.getTransactionReceipt(txHash);
-  console.log(receipt);
-}
+### Exemplo: Assinando Mensagens
 
-getTransactionReceipt("0xTransactionHash");
+Vamos usar a função `Account.sign_message()` para assinar uma mensagem com a chave privada.
+
+```python
+from eth_account import Account
+from eth_account.messages import encode_defunct
+
+# Define a mensagem que será assinada
+message = "Esta é uma mensagem de teste"
+encoded_message = encode_defunct(text=message)
+
+# Assinatura com a chave privada
+private_key = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+signed_message = Account.sign_message(encoded_message, private_key=private_key)
+
+# Exibe a assinatura
+print("Assinatura:", signed_message.signature.hex())
 ```
-
-### Dados do Recibo
-
-Campos importantes no recibo:
-
-- **status**: indica se a transação foi bem-sucedida (`1`) ou falhou (`0`).
-- **gasUsed**: gás efetivamente consumido na execução.
-- **contractAddress**: endereço do contrato, se a transação criou um contrato.
-- **logs**: lista de eventos gerados durante a execução da transação.
-
----
-
-## 4. Analisando Logs no Recibo
-
-Os **logs** são eventos emitidos por contratos durante a execução de uma transação. Eles são úteis para entender interações específicas e dados gerados pelos contratos.
-
-Exemplo de leitura de logs:
-
-```javascript
-async function readTransactionLogs(txHash) {
-  const receipt = await web3.eth.getTransactionReceipt(txHash);
-  receipt.logs.forEach((log) => {
-    console.log("Log Address:", log.address);
-    console.log("Log Topics:", log.topics);
-    console.log("Log Data:", log.data);
-  });
-}
-
-readTransactionLogs("0xTransactionHash");
-```
-
-### Estrutura dos Logs
-
-- **address**: contrato que gerou o log.
-- **topics**: identificadores dos eventos, ajudam a indexar o tipo de evento.
-- **data**: informações associadas ao evento.
 
 ---
 
 ## Conclusão
 
-Hoje, aprendemos como obter e analisar transações na blockchain usando **Web3.js**. Desde o acesso básico com o `getTransaction` até o uso de `getTransactionReceipt` para analisar o recibo e entender os eventos gerados, cobrimos o essencial para explorar e validar as transações com profundidade.
+Hoje aprendemos a instalar e configurar a Web3.py, exploramos as diferenças principais em relação ao Web3.js, e vimos como criar carteiras e gerar assinaturas digitais. Esses fundamentos são essenciais para qualquer integração Web3, pois a criação e o gerenciamento de contas e assinaturas são usados em autenticação e transações seguras.
 
 ---
 
 ## Recapitulação
 
-- Obtenção de uma transação via hash com `getTransaction`.
-- Análise detalhada dos campos de uma transação.
-- Leitura do recibo da transação com `getTransactionReceipt`.
-- Análise dos logs e eventos gerados na transação.
+- Instalamos o Web3.py.
+- Aprendemos a criar e gerenciar carteiras, protegendo as chaves com keystores.
+- Demonstramos como assinar e verificar mensagens com a chave privada da conta.
 
 ---
 
 ## Lição de casa
 
-- Obtenha e analise uma transação real do Ethereum usando `getTransaction` e `getTransactionReceipt`.
-- Liste todos os logs de uma transação que envolva um contrato.
+1. Instale o Web3.py em um novo projeto.
+2. Crie uma nova carteira e armazene-a em um keystore.
+3. Assine uma mensagem personalizada e verifique a assinatura em seu código.
 
 ---
 
 ## Próxima Aula
 
-Na próxima aula, aprenderemos a ler dados de blocos, entendendo sua estrutura e como acessá-los.
+Na próxima aula, vamos aprender a ler saldos da blockchain utilizando o Web3.py, permitindo que você obtenha informações financeiras de contas e explore dados on-chain. Até lá!
