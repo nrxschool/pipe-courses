@@ -1,4 +1,4 @@
-# Aula 2: O que é Criptografia
+# Aula 3: O que é Criptografia
 
 ## Abertura
 
@@ -22,9 +22,11 @@ Bem-vindo à segunda aula do módulo! Hoje vamos introduzir conceitos básicos d
 Exemplo de uso:
 
 ```javascript
-const sha1 = require("crypto-js/sha1");
-const hash = sha1("hello world");
-console.log(hash.toString());
+const crypto = require("crypto");
+
+const sha1 = crypto.createHash("sha1");
+
+sha1.update("hello world").digest("hex");
 ```
 
 - **Keccak256**: Um algoritmo mais seguro, base do hash **SHA-3** e amplamente usado em blockchains, especialmente no Ethereum. Gera um hash de 256 bits e é usado para identificar dados e proteger transações.
@@ -32,11 +34,9 @@ console.log(hash.toString());
 Exemplo de uso com Web3.js:
 
 ```javascript
-const Web3 = require("web3");
-const web3 = new Web3();
+const web3 = require("web3");
 
-const data = web3.utils.keccak256("hello world");
-console.log(data);
+web3.utils.keccak256("hello world");
 ```
 
 Essas funções de hash são unidirecionais, ou seja, é impossível (ou extremamente difícil) reverter o hash para o dado original.
@@ -66,24 +66,20 @@ Vamos criar uma chave, assinar uma mensagem e verificar a assinatura:
 
 ```javascript
 const account = web3.eth.accounts.create();
-console.log("Chave privada:", account.privateKey);
-console.log("Endereço (chave pública):", account.address);
+account
 ```
 
 2. **Assinando uma Mensagem**:
 
 ```javascript
 const message = "Autenticação na Web3";
-const signature = web3.eth.accounts.sign(message, account.privateKey);
-console.log("Assinatura:", signature.signature);
+web3.eth.accounts.sign(message, account.privateKey);
 ```
 
 3. **Verificando a Assinatura**:
 
 ```javascript
-const verifiedAddress = web3.eth.accounts.recover(message, signature.signature);
-console.log("Endereço verificado:", verifiedAddress);
-console.log("Assinatura válida:", verifiedAddress === account.address);
+web3.eth.accounts.recover(message, signature.signature);
 ```
 
 Nesse exemplo, assinamos uma mensagem com a chave privada e depois a verificamos com a chave pública. Isso demonstra como podemos autenticar transações e mensagens em um sistema descentralizado.
