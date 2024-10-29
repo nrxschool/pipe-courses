@@ -11,10 +11,10 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 
 ## Módulo 2 [Web3.js v4.x]
 
-- [ ] Como criar carteiras
-- [ ] Como assinar mensagem
-- [ ] Lendo saldos da blockchain
-- [ ] Lendo dados de transações
+- [x] Como criar carteiras
+- [x] Como assinar mensagem
+- [x] Lendo saldos da blockchain
+- [x] Lendo dados de transações
 - [ ] Lendo dados de blocos
 - [ ] Como criar transações simples (envio de Ether)
 - [ ] O que são ABIs
@@ -26,7 +26,7 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 
 ## Módulo 3 [Web3.py v7.x]
 
-- [ ] Como criar carteiras
+- [x] Como criar carteiras
 - [ ] Como assinar mensagem
 - [ ] Lendo saldos da blockchain
 - [ ] Lendo dados de transações
