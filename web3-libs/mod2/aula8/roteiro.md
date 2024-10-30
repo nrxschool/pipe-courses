@@ -17,16 +17,7 @@ Olá! Bem-vindo à nossa décima segunda aula sobre Web3.js v4.x. Nesta aula, va
 
 Para que possamos enviar dados complexos, precisamos garantir que o contrato inteligente em Solidity está preparado para receber esses tipos de dados. Vamos ver um exemplo de contrato que aceita Structs, Enums e Arrays em uma única função.
 
-### Exemplo de contrato Solidity
-
-```js
-
-```
-
-Neste exemplo:
-
-- A função `placeOrder` recebe parâmetros do tipo `uint`, `string`, `uint256`, `OrderStatus` (enum) e `address[]` (array).
-- Os dados são usados para criar um novo `Order`, que é armazenado em um array de pedidos (`orders`).
+- [Contrato em Solidiry](../playground/aula8/parklot.sol)
 
 ## 2. Criando e enviando transações com Structs
 
@@ -34,61 +25,13 @@ Para enviar dados para um `struct`, você precisa passar cada atributo do `struc
 
 ### Exemplo de envio com Web3.js
 
-Primeiro, defina o ABI e o endereço do contrato no Web3.js:
+- **Compilar contrato**
 
-```javascript
-const Web3 = require('web3');
-const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
-
-const abi = [...]; // ABI do contrato com a função placeOrder
-const contractAddress = '0xEndereçoDoContrato';
-const contract = new web3.eth.Contract(abi, contractAddress);
+```bash
+forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
 ```
 
-Para enviar um `struct` (neste caso, cada parâmetro separadamente), use o seguinte código:
-
-```javascript
-const account = "0xSeuEndereco";
-const privateKey = "0xSuaChavePrivada"; // Use com segurança
-
-async function placeOrder() {
-  const orderId = 1;
-  const description = "Order Description";
-  const amount = web3.utils.toWei("0.1", "ether");
-  const status = 1; // Status de 'Shipped' no enum
-  const recipients = ["0xEndereco1", "0xEndereco2"];
-
-  const tx = contract.methods.placeOrder(
-    orderId,
-    description,
-    amount,
-    status,
-    recipients
-  );
-
-  const gas = await tx.estimateGas({ from: account });
-  const gasPrice = await web3.eth.getGasPrice();
-  const data = tx.encodeABI();
-  const nonce = await web3.eth.getTransactionCount(account);
-
-  const signedTx = await web3.eth.accounts.signTransaction(
-    {
-      to: contractAddress,
-      data,
-      gas,
-      gasPrice,
-      nonce,
-      chainId: 1,
-    },
-    privateKey
-  );
-
-  const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-  console.log("Transação enviada! Hash:", receipt.transactionHash);
-}
-
-placeOrder();
-```
+- [Enviando um Struct para o contrato](../playground/aula8/structs.js)
 
 ## 3. Lidando com Enums em transações
 
@@ -100,74 +43,13 @@ Para enviar um valor de `enum`, usamos o índice que representa o valor do `enum
 
 Ao enviar o valor `status = 1` no exemplo, estamos especificando que o pedido está no status `Shipped`.
 
+- [Enviando um Enum para o contrato](../playground/aula8/enum.js)
+
 ## 4. Envio de Arrays e Arrays complexos
 
 Arrays podem ser enviados diretamente, contanto que o contrato Solidity esteja configurado para recebê-los como `memory`. No exemplo `placeOrder`, passamos um array de endereços para o parâmetro `recipients`.
 
-### Enviando arrays aninhados
-
-Para enviar arrays mais complexos, como arrays de structs ou arrays multidimensionais, a função do contrato precisa aceitar esses dados em uma estrutura compatível.
-
-Exemplo de uma função Solidity para aceitar um array de `Order` structs:
-
-```solidity
-function placeMultipleOrders(Order[] memory _orders) public {
-    for (uint i = 0; i < _orders.length; i++) {
-        orders.push(_orders[i]);
-    }
-}
-```
-
-Para enviar dados de `Order[]` em Web3.js, você precisa formatar cada pedido de acordo com o ABI do contrato e enviá-los em um array.
-
-### Exemplo de envio de array aninhado com Web3.js
-
-```javascript
-async function placeMultipleOrders() {
-  const orders = [
-    {
-      id: 1,
-      description: "Order 1",
-      amount: web3.utils.toWei("0.1", "ether"),
-      status: 0,
-    },
-    {
-      id: 2,
-      description: "Order 2",
-      amount: web3.utils.toWei("0.2", "ether"),
-      status: 1,
-    },
-  ];
-
-  const tx = contract.methods.placeMultipleOrders(orders);
-
-  const gas = await tx.estimateGas({ from: account });
-  const gasPrice = await web3.eth.getGasPrice();
-  const data = tx.encodeABI();
-  const nonce = await web3.eth.getTransactionCount(account);
-
-  const signedTx = await web3.eth.accounts.signTransaction(
-    {
-      to: contractAddress,
-      data,
-      gas,
-      gasPrice,
-      nonce,
-      chainId: 1,
-    },
-    privateKey
-  );
-
-  const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-  console.log("Transação enviada! Hash:", receipt.transactionHash);
-}
-
-placeMultipleOrders();
-```
-
-Neste exemplo:
-
-- Enviamos um array de objetos `orders` como parâmetro para a função `placeMultipleOrders`, cada um contendo os dados necessários para o `struct Order`.
+- [Enviando um Array para o contrato](../playground/aula8/array.js)
 
 ## Conclusão
 
@@ -183,9 +65,9 @@ Hoje aprendemos a enviar transações complexas para contratos inteligentes usan
 ## Lição de casa
 
 1. **Fácil**: Crie uma função de contrato que aceite um `struct` com três campos e envie uma transação para ele.
-2. **Médio**: Crie uma função em Solidity que receba um `enum` e uma string, e use Web3.js para enviar uma transação que altere o valor do enum.
+2. **Médio**: Envie um array aninhado para o contrato.
 3. **Difícil**: Envie um array de `structs` para um contrato, onde cada struct possui pelo menos três campos diferentes.
 
 ## Próxima aula
 
-Na próxima aula, vamos iniciar o Módulo 3, onde exploraremos o uso do **Web3.py para realizar operações similares na blockchain**. Nos vemos lá!
+Na próxima aula, vamos iniciar o Módulo 3, onde exploraremos **Como ler dados complexos do contrato**. Nos vemos lá!
