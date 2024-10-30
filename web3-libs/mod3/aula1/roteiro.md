@@ -34,60 +34,9 @@ pip install web3
 
 Para gerenciar uma conta na blockchain, é necessário criar uma carteira, composta por uma chave pública e uma chave privada.
 
-### Exemplo 1: Criação de Carteira Aleatória
-
-Para criar uma carteira aleatória (ou seja, uma conta com uma chave pública e uma chave privada), podemos usar a função `Account.create()` do Web3.py.
-
-```python
-from web3 import Web3
-from eth_account import Account
-
-# Cria uma conta aleatória
-random_account = Account.create()
-
-# Exibe a chave pública e privada
-print("Endereço (chave pública):", random_account.address)
-print("Chave privada:", random_account.key.hex())
-```
-
-### Exemplo 2: Importando Carteira de uma Chave Privada
-
-Se você já possui uma chave privada, é possível gerar uma carteira com essa chave.
-
-```python
-from eth_account import Account
-
-# Insira a chave privada aqui (exemplo fictício)
-private_key = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-imported_account = Account.from_key(private_key)
-
-# Exibe o endereço da conta
-print("Endereço:", imported_account.address)
-```
-
-### Exemplo 3: Armazenando Carteiras
-
-Podemos armazenar as informações da carteira de forma segura usando keystores. O keystore permite proteger a chave privada com uma senha.
-
-```python
-from eth_account import Account
-import json
-
-# Gera uma conta aleatória
-account = Account.create()
-
-# Define uma senha para proteger o keystore
-password = "minha_senha_segura"
-
-# Cria o keystore criptografado
-keystore = Account.encrypt(account.key, password)
-
-# Salva o keystore em um arquivo JSON
-with open("keystore.json", "w") as file:
-    json.dump(keystore, file)
-
-print("Keystore salvo com sucesso!")
-```
+- [Criação de Carteira Aleatória](../playground/aula1/createRandomWallet.js)
+- [Importando Carteira de uma Chave Privada](../playground/aula1/importWalletFromPrivateKey.js)
+- [Armazenando Carteiras](../playground/aula1/encryptWallet.js)
 
 ---
 
@@ -95,25 +44,7 @@ print("Keystore salvo com sucesso!")
 
 Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. Esse processo cria uma assinatura digital única usando a chave privada da conta.
 
-### Exemplo: Assinando Mensagens
-
-Vamos usar a função `Account.sign_message()` para assinar uma mensagem com a chave privada.
-
-```python
-from eth_account import Account
-from eth_account.messages import encode_defunct
-
-# Define a mensagem que será assinada
-message = "Esta é uma mensagem de teste"
-encoded_message = encode_defunct(text=message)
-
-# Assinatura com a chave privada
-private_key = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
-signed_message = Account.sign_message(encoded_message, private_key=private_key)
-
-# Exibe a assinatura
-print("Assinatura:", signed_message.signature.hex())
-```
+- [Assinando Messagens](../playground/aula1/signMessage.js)
 
 ---
 
