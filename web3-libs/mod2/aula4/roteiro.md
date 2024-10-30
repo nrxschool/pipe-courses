@@ -9,7 +9,6 @@ Olá! Bem-vindo à nossa quarta aula sobre Web3.js v4. Nesta aula, vamos explora
 1. Buscando blocos com Web3.js
 2. Buscando transações de um bloco específico
 3. Verificando o estado de um bloco
-4. Conclusão e exemplos práticos
 
 ---
 

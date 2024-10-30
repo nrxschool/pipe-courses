@@ -7,9 +7,8 @@ Olá! Bem-vindo à quinta aula do curso sobre Web3.js v4.x. Hoje, vamos abordar 
 ### Programação:
 
 1. Entendendo transações na blockchain
-2. Preparação para envio de transações com Web3.js
-3. Passo a passo para criar uma transação simples
-4. Executando e verificando a transação
+2. Passo a passo para criar uma transação simples
+3. Executando e verificando a transação
 
 ---
 
@@ -25,94 +24,15 @@ Uma transação na blockchain é uma ação registrada e validada por mineradore
 
 Esse processo é totalmente descentralizado, o que significa que a transação precisa ser assinada pela conta de origem para garantir sua autenticidade e autorização.
 
-## 2. Preparação para envio de transações com Web3.js
+## 2. Passo a passo para criar uma transação simples
 
-Para criar e enviar uma transação simples no Ethereum usando Web3.js, vamos precisar de algumas informações e configurações iniciais:
+1. Montar transação
+2. Assinar transação
+3. Enviar transação
 
-- **Conta de origem e chave privada**: A chave privada é necessária para assinar a transação.
-- **Conta de destino**: Endereço para onde o Ether será enviado.
-- **Gás e Gás Price**: Valor de gás necessário para a execução da transação e o preço do gás a ser pago por unidade.
+## 3. Executando e Verificando a Transação
 
-⚠️ **Atenção**: Nunca compartilhe sua chave privada e sempre mantenha-a protegida. Neste exemplo, vamos usá-la apenas para fins educacionais.
-
-Instale o Web3.js:
-
-```bash
-npm install web3
-```
-
-Configure sua conexão com a blockchain:
-
-```javascript
-const Web3 = require("web3");
-const web3 = new Web3("https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID");
-```
-
-## 3. Passo a passo para criar uma transação simples
-
-Agora que temos as configurações iniciais, vamos montar uma transação de exemplo para enviar uma pequena quantidade de Ether.
-
-1. **Defina as variáveis de transação**:
-
-   - Endereço de origem (de)
-   - Endereço de destino (para)
-   - Valor em wei
-   - Gas e Gas Price
-
-2. **Crie e assine a transação**:
-   - Use a chave privada da conta de origem para assinar a transação.
-3. **Envie a transação**:
-   - Utilize `web3.eth.sendSignedTransaction` para enviar a transação assinada.
-
-Exemplo de código:
-
-```javascript
-const fromAddress = "0xSuaContaDeOrigem";
-const toAddress = "0xContaDeDestino";
-const privateKey = "0xSuaChavePrivada"; // Mantenha esta chave protegida
-
-async function sendEther() {
-  const tx = {
-    from: fromAddress,
-    to: toAddress,
-    value: web3.utils.toWei("0.01", "ether"), // Valor a ser enviado
-    gas: 21000,
-    gasPrice: await web3.eth.getGasPrice(),
-  };
-
-  const signedTx = await web3.eth.accounts.signTransaction(tx, privateKey);
-  const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-
-  console.log(`Transação enviada! Hash: ${receipt.transactionHash}`);
-}
-
-sendEther();
-```
-
-## 4. Executando e verificando a transação
-
-Após o envio da transação, podemos monitorá-la na blockchain e confirmar se foi bem-sucedida. O método `sendSignedTransaction` retorna um recibo (`receipt`) que contém informações como:
-
-- **transactionHash**: Identificação única da transação.
-- **status**: Indica se a transação foi confirmada.
-- **blockHash** e **blockNumber**: Dados do bloco onde a transação foi registrada.
-
-Exemplo de verificação do recibo:
-
-```javascript
-const transactionHash = "HASH_DA_TRANSACAO";
-
-web3.eth.getTransactionReceipt(transactionHash).then((receipt) => {
-  console.log(receipt);
-  if (receipt && receipt.status) {
-    console.log("Transação confirmada com sucesso!");
-  } else {
-    console.log("Transação falhou.");
-  }
-});
-```
-
-Com essa verificação, garantimos que a transação foi minerada e confirmada na blockchain.
+- [Enviando Transação](../playground/aula5/sendTx.js)
 
 ## Conclusão
 
