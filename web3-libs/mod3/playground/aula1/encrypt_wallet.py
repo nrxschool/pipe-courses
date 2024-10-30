@@ -1,34 +1,35 @@
-from web3 import Web3
+from web3 import Account
 import json
+import getpass
 
-# Create Web3 instance
-web3 = Web3()
 
-# Create Account
-account = web3.eth.accounts.create()
-private_key = account.privateKey.hex()
+# Cria uma conta nova na wallet e obtém a chave privada
+account = Account().create()
+private_key = account.key.to_0x_hex()
 print("Chave Privada:", private_key)
 
 
-# Function to ask for password and encrypt the private key
+# Função para solicitar a senha e encriptar a chave privada
 def encrypt_private_key():
-    password = input("Digite sua senha para encriptar: ")
-    keystore = web3.eth.accounts.encrypt(private_key, password)
+    password = getpass.getpass("Digite sua senha para encriptar: ")
+
+    keystore = Account().encrypt(private_key, password)
     print("Keystore Encriptado:", json.dumps(keystore, indent=2))
 
-    # Call the function to decrypt
+    # Chamar a função para decriptar
     decrypt_keystore(keystore)
 
 
-# Function to ask for password and decrypt the private key
+# Função para solicitar a senha e decriptar a chave privada
 def decrypt_keystore(keystore):
-    password = input("Digite sua senha para decriptar: ")
+    password = getpass.getpass("Digite sua senha para decriptar: ")
+
     try:
-        decrypted_account = web3.eth.accounts.decrypt(keystore, password)
-        print("Conta Decriptada:", decrypted_account)
-    except Exception as e:
-        print("Erro ao decriptar a chave:", str(e))
+        decrypted_account = Account().decrypt(keystore, password)
+        print("Conta Decriptada:", f'0x{decrypted_account.hex()}')
+    except ValueError as error:
+        print("Erro ao decriptar a chave:", error)
 
 
-# Start the process
+# Inicia o processo
 encrypt_private_key()
