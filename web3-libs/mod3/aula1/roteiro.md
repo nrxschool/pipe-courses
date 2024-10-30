@@ -6,7 +6,7 @@ Bem-vindo à primeira aula prática do Módulo 2, onde aprenderemos sobre **Web3
 
 ### Programa da aula:
 
-1. Como instalar a Web3.py
+1. Como instalar a Web3.py v7
 2. Criando carteiras com Web3.py
 3. Assinando mensagens digitalmente
 

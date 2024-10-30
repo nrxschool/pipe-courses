@@ -1,23 +1,28 @@
-from web3 import Web3
-
-web3 = Web3()
+from eth_account.messages import encode_defunct
+from web3 import Account
 
 
 # Function to sign a message
 def sign_message():
     message = input("Enter the message to sign: ")
+    msg = encode_defunct(text=message)
     # Create Account
-    account = web3.eth.accounts.wallet.create(1)[0]
-    print("Account:", account)
+    account = Account().create()
+    print("Address:", account.address)
 
     # Sign the message
-    signature = web3.eth.accounts.sign(message, account.privateKey)
-    print("Signature:", signature.signature)
+    signature = Account().sign_message(msg, account.key)
+    print("Signature:", signature.signature.hex())
 
     # Verify the signature
-    verify = web3.eth.accounts.recover("outra messagem", signature.signature)
-    print("Verification:", "Success" if verify == account.address else "Failed")
+    message = "outra messagem"
+    msg = encode_defunct(text=message)
+    verify = Account().recover_message(msg, signature=signature.signature)
+
+    if verify == account.address:
+        print("✅ Verification: Success")
+    else:
+        print("🚨 Verification: Failed")
 
 
-# Call the function to sign a message
 sign_message()
