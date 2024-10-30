@@ -26,7 +26,7 @@ Para começar, vamos instalar a versão 6.x da Ethers.js, que traz diversas melh
 2. **Instalando o Ethers.js v6**:
 
 ```bash
-npm install ethers
+npm install ethers@^6.0.0
 ```
 
 ---
@@ -46,9 +46,36 @@ O Ethers.js v6.x oferece várias vantagens em relação ao Web3.js, como:
 
 Para gerenciar uma conta na blockchain, é necessário criar uma carteira, que inclui uma chave pública e uma chave privada.
 
-- [Criação de Carteira Aleatória](../playground/aula1/createRandomWallet.js)
-- [Importando Carteira de uma Chave Privada](../playground/aula1/importWalletFromPrivateKey.js)
-- [Armazenando Carteiras](../playground/aula1/encryptWallet.js)
+- **Criação de Carteira Aleatória**:
+
+```javascript
+const { ethers } = require('ethers'); 
+
+const wallet = ethers.Wallet.createRandom()
+console.log('Endereço:', wallet.address);
+console.log('Chave Privada:', wallet.privateKey);
+```
+
+- **Importando Carteira de uma Chave Privada**:
+
+```javascript
+const privateKey = '0x2a227235514c6334f9b88aa4088e1dbb1e3d1a5ee23053ff2a26a4ae9f51b7a1';
+const wallet = new ethers.Wallet(privateKey)
+console.log('Endereço:', wallet.address);
+```
+
+- **Armazenando Carteiras**:
+
+Ethers.js facilita o armazenamento seguro de carteiras. Podemos criptografar a carteira e salvar em um keystore:
+
+```javascript
+async function encryptWallet(password) {
+    const encryptedJson = await wallet.encrypt(password); 
+    console.log("Keystore Encriptado:", encryptedJson);
+}
+
+encryptWallet('sua_senha_secreta');
+```
 
 ---
 
@@ -56,7 +83,12 @@ Para gerenciar uma conta na blockchain, é necessário criar uma carteira, que i
 
 Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. A assinatura é gerada usando a chave privada da conta.
 
-- [Assinando Messagens](../playground/aula1/signMessage.js)
+- **Assinando Mensagens**:
+
+```javascript
+const message = "Sua mensagem para assinar";
+const sig = await wallet.signMessage(message);
+```
 
 ---
 

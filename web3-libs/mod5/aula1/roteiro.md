@@ -48,9 +48,103 @@ O Viem 2.x oferece várias vantagens em relação ao Ethers.js:
 
 Para gerenciar uma conta na blockchain, é necessário criar uma carteira, que inclui uma chave pública e uma chave privada.
 
-- [Criação de Carteira Aleatória](../playground/aula1/createRandomWallet.js)
-- [Importando Carteira de uma Chave Privada](../playground/aula1/importWalletFromPrivateKey.js)
-- [Armazenando Carteiras](../playground/aula1/encryptWallet.js)
+- **Criação de Carteira Aleatória**:
+
+```javascript
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
+console.log('Endereço:', account.address)
+console.log('Chave Privada:', privateKey)
+```
+
+- **Importando Carteira de uma Chave Privada**:
+
+```javascript
+import { privateKeyToAccount } from 'viem/accounts'
+
+const privateKey = '0x2a227235514c6334f9b88aa4088e1dbb1e3d1a5ee23053ff2a26a4ae9f51b7a1'
+const account = privateKeyToAccount(privateKey)
+console.log('Endereço:', account.address)
+```
+
+- **Armazenando Carteiras**:
+
+O Viem não tem funções nativas que lidam com armazenamento de carteiras, então é necessário importar bibliotecas de criptografia.
+
+```javascript
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { randomBytes, pbkdf2Sync, createCipheriv, createDecipheriv } from 'crypto'
+import { toHex } from 'viem'
+
+// Criar uma nova carteira
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
+
+console.log('Endereço:', account.address)
+console.log('Chave Privada:', privateKey)
+
+// Configurar interface readline
+const rl = createInterface({
+  input,
+  output
+})
+
+async function encryptPrivateKey() {
+  const password = await new Promise((resolve) => {
+    rl.question("Digite sua senha para encriptar: ", resolve)
+  })
+
+  // Parâmetros de criptografia
+  const salt = randomBytes(32)
+  const iv = randomBytes(16)
+  const kdfparams = {
+    salt: salt,
+    iterations: 1000,
+    hashFunction: 'sha256'
+  }
+
+  // Deriva a chave de encriptação do password
+  const derivedKey = pbkdf2Sync(
+    Buffer.from(password),
+    kdfparams.salt,
+    kdfparams.iterations,
+    32,
+    kdfparams.hashFunction
+  )
+
+  // Encripta a chave privada
+  const cipher = createCipheriv('aes-256-cbc', derivedKey, iv)
+  let ciphertext = cipher.update(privateKey.slice(2), 'hex', 'hex')
+  ciphertext += cipher.final('hex')
+
+  // Cria o keystore no formato JSON
+  const encryptedJson = {
+    version: 1,
+    address: account.address,
+    id: toHex(randomBytes(32)),
+    crypto: {
+      cipher: 'aes-256-cbc',
+      ciphertext: ciphertext,
+      cipherparams: {
+        iv: iv.toString('hex')
+      },
+      kdf: 'pbkdf2',
+      kdfparams: {
+        salt: salt.toString('hex'),
+        iterations: kdfparams.iterations,
+        hashFunction: kdfparams.hashFunction
+      }
+    }
+  }
+
+  console.log("Keystore Encriptado:", JSON.stringify(encryptedJson, null, 2))
+
+}
+
+encryptPrivateKey()
+```
 
 ---
 
@@ -58,7 +152,22 @@ Para gerenciar uma conta na blockchain, é necessário criar uma carteira, que i
 
 Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. A assinatura é gerada usando a chave privada da conta.
 
-- [Assinando Messagens](../playground/aula1/signMessage.js)
+- **Assinando Mensagens**:
+
+```javascript
+const message = "Sua mensagem para assinar"
+const signature = await account.signMessage({
+  message
+})
+
+// Verificando a assinatura
+import { verifyMessage } from 'viem'
+const isValid = await verifyMessage({
+  address: account.address,
+  message,
+  signature
+})
+```
 
 ---
 
