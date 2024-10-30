@@ -85,3 +85,4 @@ Hoje aprendemos a instalar e configurar a Web3.js v4, exploramos as diferenças 
 ## Próxima Aula
 
 Na próxima aula, vamos aprender a ler saldos da blockchain utilizando a Web3.js, permitindo que você obtenha informações financeiras de contas e explore dados on-chain. Até lá!
+
