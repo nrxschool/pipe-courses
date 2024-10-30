@@ -26,7 +26,7 @@ Para começar, vamos instalar a versão 6.x da Ethers.js, que traz diversas melh
 2. **Instalando o Ethers.js v6**:
 
 ```bash
-npm install ethers@^6.0.0
+npm install ethers
 ```
 
 ---
