@@ -97,4 +97,4 @@ Hoje, aprendemos sobre o que é um ABI e como ele serve como uma interface entre
 
 ## Próxima aula
 
-Na próxima aula, vamos aprender **como se conectar com contratos inteligentes e ler dados simples utilizando Web3.js**. Nos vemos lá!
+Na próxima aula, vamos aprender **Como escrever dados no contrato (envio de ERC20)**. Nos vemos lá!

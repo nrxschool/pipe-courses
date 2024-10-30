@@ -1,4 +1,4 @@
-# Aula 8: **Como criar transações complexas (envio de Struct, Enum e Array) com Web3.js**
+# Aula 8: **Como criar transações complexas (envio de Struct, Enum e Array)**
 
 ## Abertura
 
@@ -19,32 +19,8 @@ Para que possamos enviar dados complexos, precisamos garantir que o contrato int
 
 ### Exemplo de contrato Solidity
 
-```solidity
-pragma solidity ^0.8.0;
+```js
 
-contract ComplexContract {
-
-    enum OrderStatus { Pending, Shipped, Delivered }
-
-    struct Order {
-        uint id;
-        string description;
-        uint256 amount;
-        OrderStatus status;
-    }
-
-    Order[] public orders;
-
-    function placeOrder(uint id, string memory description, uint256 amount, OrderStatus status, address[] memory recipients) public {
-        Order memory newOrder = Order(id, description, amount, status);
-        orders.push(newOrder);
-
-        // Realiza alguma operação com recipients
-        for (uint i = 0; i < recipients.length; i++) {
-            // Log ou operação com recipients[i]
-        }
-    }
-}
 ```
 
 Neste exemplo:
