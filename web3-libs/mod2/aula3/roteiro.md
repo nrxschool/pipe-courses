@@ -1,4 +1,4 @@
-# Aula 3: Lendo Dados de Transações
+# Aula 3: **Lendo Dados de Transações**
 
 ## Abertura
 

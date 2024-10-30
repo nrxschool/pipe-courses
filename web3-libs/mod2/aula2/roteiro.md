@@ -1,4 +1,4 @@
-# Aula 2: Lendo saldos da blockchain
+# Aula 2: **Lendo saldos da blockchain**
 
 ## Abertura
 

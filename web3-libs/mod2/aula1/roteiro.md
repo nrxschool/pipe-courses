@@ -1,4 +1,4 @@
-# Aula 1: Como criar carteiras com Web3.js
+# Aula 1: **Como criar carteiras com Web3.js**
 
 ## Abertura
 
