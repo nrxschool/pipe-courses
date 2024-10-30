@@ -16,7 +16,7 @@ def sign_message():
 
     # Verify the signature
     message = "outra messagem"
-    msg = encode_defunct(text=message)
+    msg2 = encode_defunct(text=message)
     verify = Account().recover_message(msg, signature=signature.signature)
 
     if verify == account.address:
