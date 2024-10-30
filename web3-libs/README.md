@@ -21,8 +21,8 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 - ✅ [aula 8: Como se conectar com contratos](mod2/aula8/roteiro.md)
 - ✅ [aula 9: Como ler dados simples do contrato (tipos primitivos)](mod2/aula9/roteiro.md)
 - ✅ [aula 10: Como ler dados complexos do contrato (Struct, Enum e Array)](mod2/aula10/roteiro.md)
-- ⏰ [aula 11: Como criar transações complexas (envio de ERC20)](mod2/aula11/roteiro.md)
-- ⏰ [aula 12: Como criar transações complexas (envio de Struct, Enum e Array)](mod2/aula12/roteiro.md)
+- ✅ [aula 11: Como criar transações complexas (envio de ERC20)](mod2/aula11/roteiro.md)
+- ✅ [aula 12: Como criar transações complexas (envio de Struct, Enum e Array)](mod2/aula12/roteiro.md)
 
 ## Módulo 3 [Web3.py v7.x]
 
