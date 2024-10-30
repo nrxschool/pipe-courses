@@ -1,4 +1,4 @@
-# Aula 6: **O que são ABIs e como utilizá-los em Web3.js**
+# Aula 6: **O que são ABIs**
 
 ## Abertura
 

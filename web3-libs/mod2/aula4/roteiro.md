@@ -1,4 +1,4 @@
-# Aula 4: **Lendo dados de blocos com Web3.js v4.x**
+# Aula 4: **Lendo dados de blocos**
 
 ## Abertura
 
