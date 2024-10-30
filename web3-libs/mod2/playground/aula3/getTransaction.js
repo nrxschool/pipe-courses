@@ -12,7 +12,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Digite o endereço da conta: ", (txHash) => {
+rl.question("Digite o hash da transação: ", (txHash) => {
   web3.eth
     .getTransaction(txHash)
     .then((transaction) => {
