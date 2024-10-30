@@ -1,150 +1,98 @@
-# Aula 7: **O que são ABIs e como utilizá-los em Web3.js**
+# Aula 7: **Como escrever dados no contrato (envio de ERC20)**
 
 ## Abertura
 
-Olá! Bem-vindo à nossa sétima aula sobre Web3.js v4. Nesta aula, vamos abordar um componente essencial para a interação com contratos inteligentes na blockchain: os ABIs (Application Binary Interface). Compreender o que são ABIs e como utilizá-los é crucial para qualquer desenvolvedor que queira interagir com contratos na blockchain de forma programática e eficiente.
+Olá! Bem-vindo à nossa aula sobre como criar transações complexas na blockchain, focando especificamente no envio de tokens ERC20. Hoje vamos entender como realizar transações usando o padrão ERC20, que é amplamente utilizado para tokens na rede Ethereum. Dois métodos essenciais para essas transações são `approve` e `transferFrom`, que juntos permitem o gerenciamento de permissões e a transferência segura de tokens entre carteiras.
 
 ### Programação:
 
-1. O que é um ABI e por que ele é importante
-2. Estrutura de um ABI
-3. Como obter e interpretar um ABI
-4. Utilizando ABIs em Web3.js para acessar contratos
+1. O que são tokens ERC20 e suas transações
+2. Método `approve`: Autorizando transferências
+3. Método `transferFrom`: Transferindo tokens aprovados
+4. Exemplos práticos e cuidados de segurança
 
 ---
 
-## 1. O que é um ABI e por que ele é importante
+## 1. O que são Tokens ERC20 e Suas Transações
 
-**ABI (Application Binary Interface)** é uma especificação que permite a comunicação entre contratos inteligentes e outras aplicações na blockchain Ethereum. Em termos simples, o ABI é uma “ponte” que define como uma aplicação externa pode interagir com um contrato inteligente, descrevendo as funções e os eventos que o contrato oferece.
+- **Tokens ERC20** são contratos inteligentes que seguem um padrão comum na rede Ethereum, permitindo que diferentes tokens sejam facilmente trocados e usados em contratos, carteiras e dApps.
+- **Transações de Tokens ERC20** envolvem métodos específicos definidos no padrão:
+  - `transfer`: usado para enviar tokens diretamente de uma conta para outra.
+  - **Transações complexas**: às vezes é necessário permitir que uma terceira parte envie tokens em seu nome, o que requer um sistema de permissões.
+- **Objetivo do `approve` e `transferFrom`**:
+  - **`approve`**: autoriza uma conta a gastar uma quantidade específica de tokens em nome do proprietário.
+  - **`transferFrom`**: realiza a transferência dos tokens aprovados, com segurança e limites de autorização.
 
-### Importância dos ABIs
+## 2. Método `approve`: Autorizando Transferências
 
-- **Interface de Comunicação**: O ABI define como os dados devem ser estruturados e codificados, permitindo que os métodos e eventos de um contrato inteligente sejam chamados de fora da blockchain.
-- **Independência da Linguagem**: O ABI abstrai a complexidade de um contrato inteligente, permitindo que desenvolvedores o utilizem em várias linguagens de programação, como JavaScript (Web3.js), Python (Web3.py), entre outras.
-- **Interoperabilidade**: Com o ABI, diferentes aplicações e bibliotecas podem interagir com contratos inteligentes de maneira uniforme.
+- **`approve(address spender, uint256 amount)`**:
+  - Este método permite que o proprietário de uma conta autorize outra conta (um “spender” ou "gastador") a transferir um valor específico de tokens em seu nome.
+  - **Por que é importante**: Em transações mais complexas, como interações com dApps, o `approve` permite que um contrato ou conta externa tenha controle limitado sobre os tokens do usuário, garantindo mais segurança e controle.
+  - **Como funciona**:
+    - A conta de origem (quem possui os tokens) chama o método `approve`.
+    - É especificado um endereço (quem pode gastar) e uma quantidade máxima de tokens que o “spender” pode transferir.
+  - **Exemplo de código**:
+    ```javascript
+    const contract = new web3.eth.Contract(abiERC20, tokenAddress);
+    await contract.methods
+      .approve(spenderAddress, amount)
+      .send({ from: ownerAddress });
+    ```
+  - **Atenção**:
+    - Definir permissões muito altas (como `approve` para um número muito grande) pode ser arriscado, pois o “spender” terá mais controle sobre os tokens.
 
-Em resumo, o ABI atua como um “guia” que mapeia a estrutura do contrato, permitindo que chamadas de funções e leitura de dados sejam feitas com precisão.
+## 3. Método `transferFrom`: Transferindo Tokens Aprovados
 
-## 2. Estrutura de um ABI
+- **`transferFrom(address from, address to, uint256 amount)`**:
+  - Depois que uma conta é aprovada para gastar tokens, ela pode chamá-los usando o `transferFrom`.
+  - **Utilidade**: Permite que dApps ou contratos interajam com tokens sem que o usuário precise manualmente enviar cada transação.
+  - **Como funciona**:
+    - O “spender” chama o método `transferFrom`, especificando o endereço de origem, o destinatário e a quantidade de tokens a ser transferida.
+    - O contrato verifica se o `approve` foi definido e se o valor da transferência está dentro do limite autorizado.
+    - Uma vez validado, a transferência é realizada.
+  - **Exemplo de código**:
+    ```javascript
+    const contract = new web3.eth.Contract(abiERC20, tokenAddress);
+    await contract.methods
+      .transferFrom(ownerAddress, recipientAddress, amount)
+      .send({ from: spenderAddress });
+    ```
+  - **Cuidados**:
+    - `transferFrom` depende da autorização dada em `approve`, então certifique-se de que `approve` foi chamado e o limite permitido ainda não foi ultrapassado.
+    - Lembre-se de que o limite pode ser ajustado ou redefinido pelo usuário a qualquer momento para mais segurança.
 
-O ABI é composto de uma lista de objetos JSON, onde cada objeto representa um **método** ou **evento** do contrato. Os principais componentes de cada entrada de um ABI incluem:
+## 4. Exemplos Práticos e Cuidados de Segurança
 
-- **name**: Nome da função ou evento.
-- **type**: Tipo de entrada, que pode ser "function" para funções e "event" para eventos.
-- **inputs**: Lista de parâmetros de entrada, contendo o nome e o tipo de cada parâmetro.
-- **outputs**: Lista de parâmetros de saída (usado em funções que retornam valores).
-- **stateMutability**: Indica se a função altera o estado da blockchain (ex: `view`, `pure`, `nonpayable`, `payable`).
-
-### Exemplo de um ABI Simples
-
-```json
-[
-  {
-    "type": "function",
-    "name": "balanceOf",
-    "inputs": [{ "name": "owner", "type": "address" }],
-    "outputs": [{ "name": "balance", "type": "uint256" }],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "transfer",
-    "inputs": [
-      { "name": "to", "type": "address" },
-      { "name": "value", "type": "uint256" }
-    ],
-    "outputs": [{ "name": "success", "type": "bool" }],
-    "stateMutability": "nonpayable"
-  }
-]
-```
-
-Neste exemplo:
-
-- A função `balanceOf` é uma função de leitura (estado `view`) que recebe um endereço e retorna o saldo (`balance`).
-- A função `transfer` permite a transferência de tokens e retorna um valor booleano (`success`) indicando o sucesso da operação.
-
-## 3. Como obter e interpretar um ABI
-
-Os ABIs geralmente são gerados automaticamente durante a compilação do contrato. Em contratos públicos, como aqueles verificados no **Etherscan**, o ABI pode ser obtido diretamente na página do contrato.
-
-### Passos para obter um ABI:
-
-1. Acesse o contrato inteligente em um explorador como Etherscan.
-2. Vá até a seção **Contract**.
-3. Clique em **Contract ABI** e copie o conteúdo.
-
-Esse ABI pode então ser utilizado diretamente no Web3.js para interagir com o contrato.
-
-## 4. Utilizando ABIs em Web3.js para acessar contratos
-
-Agora que entendemos o que é um ABI e como ele é estruturado, vamos usá-lo no Web3.js para criar uma instância de contrato e interagir com ele. Para isso, precisamos do **endereço do contrato** e do **ABI**.
-
-### Exemplo: Conectando a um Contrato com Web3.js
-
-Suponha que queremos interagir com um contrato de token e usar o método `balanceOf` para verificar o saldo de uma conta.
-
-```javascript
-const Web3 = require("web3");
-const web3 = new Web3("https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID");
-
-// ABI do contrato
-const abi = [
-  {
-    type: "function",
-    name: "balanceOf",
-    inputs: [{ name: "owner", type: "address" }],
-    outputs: [{ name: "balance", type: "uint256" }],
-    stateMutability: "view",
-  },
-];
-
-// Endereço do contrato
-const contractAddress = "0xEndereçoDoContrato";
-
-// Cria uma instância do contrato
-const contract = new web3.eth.Contract(abi, contractAddress);
-
-// Função para verificar o saldo de uma conta
-async function getBalance(address) {
-  const balance = await contract.methods.balanceOf(address).call();
-  console.log(
-    `O saldo da conta ${address} é: ${web3.utils.fromWei(
-      balance,
-      "ether"
-    )} tokens`
-  );
-}
-
-// Chamando a função para obter o saldo
-getBalance("0xEndereçoDaConta");
-```
-
-### Explicação do Código
-
-- Criamos uma instância do contrato com `new web3.eth.Contract`, passando o ABI e o endereço do contrato.
-- Utilizamos `contract.methods.balanceOf(address).call()` para invocar o método `balanceOf` e ler o saldo de um endereço.
-- O saldo é exibido no console, já convertido para Ether usando `web3.utils.fromWei` para uma apresentação mais amigável.
-
-Essa abordagem permite que você chame outras funções ou eventos definidos no ABI, fornecendo uma maneira flexível de interagir com contratos.
+- **Processo Completo**:
+  - Passo 1: O proprietário chama `approve` para definir o limite de gasto para o “spender”.
+  - Passo 2: O “spender” pode então usar `transferFrom` para transferir os tokens aprovados para outro endereço.
+- **Cuidados de Segurança**:
+  - É recomendado sempre definir o `approve` apenas para o valor exato que será utilizado ou limitar a quantidade de tempo em que a aprovação é válida.
+  - **Revogação de Aprovação**: O usuário pode redefinir a quantidade permitida para zero chamando `approve(spender, 0)` para revogar permissões previamente concedidas.
+  - **Exemplo de revogação**:
+    ```javascript
+    await contract.methods
+      .approve(spenderAddress, 0)
+      .send({ from: ownerAddress });
+    ```
 
 ## Conclusão
 
-Hoje, aprendemos sobre o que é um ABI e como ele serve como uma interface entre contratos inteligentes e aplicações externas. Entendemos a estrutura básica do ABI e como ele facilita a chamada de funções e eventos de contratos, além de ver um exemplo prático de uso no Web3.js. Esse conhecimento é crucial para avançarmos no desenvolvimento de aplicações descentralizadas que interagem diretamente com contratos inteligentes.
+O uso dos métodos `approve` e `transferFrom` é essencial para transações complexas envolvendo tokens ERC20, especialmente quando se deseja criar interações automatizadas e seguras com dApps. Esses métodos fornecem controle e segurança adicionais, permitindo que os usuários autorizem terceiros a mover tokens de maneira limitada. Essa prática é amplamente adotada para transações descentralizadas, pois oferece um controle refinado sobre os ativos.
 
 ## Recapitulação
 
-1. **O que é um ABI**: Interface de comunicação para contratos inteligentes.
-2. **Estrutura do ABI**: Componentes principais, como inputs, outputs e stateMutability.
-3. **Obtendo um ABI**: Acesso ao ABI de contratos públicos, como no Etherscan.
-4. **Usando ABIs no Web3.js**: Instância de contrato e chamada de funções.
+1. **Tokens ERC20**: padrão para criação e movimentação de tokens em Ethereum.
+2. **Método `approve`**: define um limite de gasto para uma terceira conta.
+3. **Método `transferFrom`**: permite a transferência dos tokens autorizados.
+4. **Exemplos e Segurança**: limitar permissões e revogar sempre que necessário.
 
-## Lição de casa
+## Lição de Casa
 
-1. **Fácil**: Obtenha o ABI de um contrato público no Etherscan e exiba no console.
-2. **Médio**: Use o ABI de um contrato ERC20 para criar uma função que exibe o saldo de qualquer conta.
-3. **Difícil**: Crie uma função que monitore um evento do contrato (por exemplo, `Transfer`) e exiba detalhes das transferências em tempo real.
+- **Fácil**: Realizar uma autorização básica usando `approve` e verificar o saldo do “spender”.
+- **Médio**: Usar `transferFrom` para transferir uma quantidade específica de tokens a partir de um limite autorizado.
+- **Difícil**: Criar um pequeno dApp que permita ao usuário realizar `approve` e `transferFrom` com segurança, incluindo a funcionalidade de revogação.
 
-## Próxima aula
+## Próxima Aula
 
-Na próxima aula, vamos aprender **como se conectar com contratos inteligentes e ler dados simples utilizando Web3.js**. Nos vemos lá!
+Na próxima aula, vamos aprender como realizar transações complexas para enviar **Structs, Enums e Arrays** em contratos inteligentes. Nos vemos lá!

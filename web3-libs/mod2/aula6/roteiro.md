@@ -2,14 +2,14 @@
 
 ## Abertura
 
-Olá! Bem-vindo à nossa sétima aula sobre Web3.js v4. Nesta aula, vamos abordar um componente essencial para a interação com contratos inteligentes na blockchain: os ABIs (Application Binary Interface). Compreender o que são ABIs e como utilizá-los é crucial para qualquer desenvolvedor que queira interagir com contratos na blockchain de forma programática e eficiente.
+Olá! Bem-vindo à nossa sexta aula sobre Web3.js v4. Nesta aula, vamos abordar um componente essencial para a interação com contratos inteligentes na blockchain: os ABIs (Application Binary Interface). Compreender o que são ABIs e como utilizá-los é crucial para qualquer desenvolvedor que queira interagir com contratos na blockchain de forma programática e eficiente.
 
 ### Programação:
 
 1. O que é um ABI e por que ele é importante
 2. Estrutura de um ABI
 3. Como obter e interpretar um ABI
-4. Utilizando ABIs em Web3.js para acessar contratos
+4. Utilizando ABIs em Web3.js para conectar em contratos
 
 ---
 
@@ -66,67 +66,17 @@ Neste exemplo:
 
 ## 3. Como obter e interpretar um ABI
 
-Os ABIs geralmente são gerados automaticamente durante a compilação do contrato. Em contratos públicos, como aqueles verificados no **Etherscan**, o ABI pode ser obtido diretamente na página do contrato.
+- [Compilar ERC20](../playground/aula2/erc20.sol)
 
-### Passos para obter um ABI:
-
-1. Acesse o contrato inteligente em um explorador como Etherscan.
-2. Vá até a seção **Contract**.
-3. Clique em **Contract ABI** e copie o conteúdo.
-
-Esse ABI pode então ser utilizado diretamente no Web3.js para interagir com o contrato.
+```bash
+forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
+```
 
 ## 4. Utilizando ABIs em Web3.js para acessar contratos
 
 Agora que entendemos o que é um ABI e como ele é estruturado, vamos usá-lo no Web3.js para criar uma instância de contrato e interagir com ele. Para isso, precisamos do **endereço do contrato** e do **ABI**.
 
-### Exemplo: Conectando a um Contrato com Web3.js
-
-Suponha que queremos interagir com um contrato de token e usar o método `balanceOf` para verificar o saldo de uma conta.
-
-```javascript
-const Web3 = require("web3");
-const web3 = new Web3("https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID");
-
-// ABI do contrato
-const abi = [
-  {
-    type: "function",
-    name: "balanceOf",
-    inputs: [{ name: "owner", type: "address" }],
-    outputs: [{ name: "balance", type: "uint256" }],
-    stateMutability: "view",
-  },
-];
-
-// Endereço do contrato
-const contractAddress = "0xEndereçoDoContrato";
-
-// Cria uma instância do contrato
-const contract = new web3.eth.Contract(abi, contractAddress);
-
-// Função para verificar o saldo de uma conta
-async function getBalance(address) {
-  const balance = await contract.methods.balanceOf(address).call();
-  console.log(
-    `O saldo da conta ${address} é: ${web3.utils.fromWei(
-      balance,
-      "ether"
-    )} tokens`
-  );
-}
-
-// Chamando a função para obter o saldo
-getBalance("0xEndereçoDaConta");
-```
-
-### Explicação do Código
-
-- Criamos uma instância do contrato com `new web3.eth.Contract`, passando o ABI e o endereço do contrato.
-- Utilizamos `contract.methods.balanceOf(address).call()` para invocar o método `balanceOf` e ler o saldo de um endereço.
-- O saldo é exibido no console, já convertido para Ether usando `web3.utils.fromWei` para uma apresentação mais amigável.
-
-Essa abordagem permite que você chame outras funções ou eventos definidos no ABI, fornecendo uma maneira flexível de interagir com contratos.
+- [Conectando a um Contrato](../playground/aula6/abiContract.js)
 
 ## Conclusão
 
