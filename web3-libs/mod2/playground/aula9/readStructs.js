@@ -1,5 +1,5 @@
 import { Web3 } from "web3";
-import abi from "./abi.js";
+import abi from "../aula8/abi.js";
 
 // Configuração do provider
 const RPC_URL = "http://127.0.0.1:8545";
