@@ -9,7 +9,7 @@ PRIVATE_KEY = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff8
 account = web3.eth.account.from_key(PRIVATE_KEY)
 
 # Endereço do contrato
-contract_address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+contract_address = "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0"
 
 
 # Cria uma instância do contrato
@@ -28,7 +28,8 @@ def add_people(name, age, gender):
 
     signed_tx = web3.eth.account.sign_transaction(tx, PRIVATE_KEY)
     tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
-    web3.eth.wait_for_transaction_receipt(tx_hash)
+
+    print(f"Transação confirmada {tx_hash}")
 
 
 male = 0

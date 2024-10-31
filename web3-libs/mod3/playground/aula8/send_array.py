@@ -10,7 +10,7 @@ PRIVATE_KEY = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff8
 account = web3.eth.account.from_key(PRIVATE_KEY)
 
 # Endereço do contrato
-contract_address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+contract_address = "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0"
 
 
 # Cria uma instância do contrato
@@ -34,6 +34,13 @@ def add_people_array(persons):
 people = [
     {"name": "Ana", "age": 28, "gender": 1},
     {"name": "João", "age": 25, "gender": 0},
+    {"name": "Maria", "age": 31, "gender": 1},
+    {"name": "Pedro", "age": 42, "gender": 0},
+    {"name": "Julia", "age": 19, "gender": 1},
+    {"name": "Lucas", "age": 35, "gender": 0},
+    {"name": "Beatriz", "age": 27, "gender": 1},
+    {"name": "Gabriel", "age": 33, "gender": 0},
+    {"name": "Sofia", "age": 23, "gender": 1}
 ]
 
 add_people_array(people)
