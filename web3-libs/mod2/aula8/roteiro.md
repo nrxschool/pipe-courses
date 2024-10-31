@@ -9,7 +9,7 @@ Olá! Bem-vindo à nossa décima segunda aula sobre Web3.js v4.x. Nesta aula, va
 1. Preparando o contrato para receber Structs, Enums e Arrays
 2. Criando e enviando transações com Structs
 3. Lidando com Enums em transações
-4. Envio de Arrays e Arrays complexos
+4. Envio de Arrays
 
 ---
 
@@ -28,7 +28,7 @@ Para enviar dados para um `struct`, você precisa passar cada atributo do `struc
 - **Compilar contrato**
 
 ```bash
-forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
+forge create aula8/complex.sol:Complex --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
 ```
 
 - [Enviando um Struct para o contrato](../playground/aula8/structs.js)

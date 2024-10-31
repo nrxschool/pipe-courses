@@ -10,7 +10,7 @@ contract Complex {
     struct People {
         string name;
         uint8 age;
-        Gender gender;
+        Gender gender;Gender
     }
 
     People[] peoples;
@@ -29,7 +29,7 @@ contract Complex {
         }
     }
 
-    function pushGen(Gender gen) external view returns (string[] memory) {
+    function pushGen( gen) external view returns (string[] memory) {
         uint count = 0;
         for (uint i = 0; i < peoples.length; i++) {
             if (peoples[i].gender == gen) {
