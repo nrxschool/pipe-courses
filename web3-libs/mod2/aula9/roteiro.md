@@ -1,4 +1,4 @@
-### Aula 10: **Como Ler Dados Complexos do Contrato (Struct, Enum e Array)**
+# Aula 9: **Como Ler Dados Complexos do Contrato (Struct, Enum e Array)**
 
 ## Abertura
 
@@ -19,7 +19,6 @@ No Solidity, uma `struct` permite agrupar múltiplos dados de tipos variados em 
 - **Função `getPerson()`**:
   - Essa função retorna a primeira pessoa armazenada no array `peoples`.
   - O retorno é do tipo `People`, ou seja, inclui o nome, idade e gênero da pessoa.
-- **Código para ler o `struct` com Web3.js**:
 
 
 - [Buscando um struct](../playground/aula9/readStructs.js)
@@ -35,9 +34,9 @@ Enums em Solidity são tipos personalizados que ajudam a restringir valores a um
   - Essa função retorna o valor `Gender.Male`, que ajuda a ver como enums são interpretados no Solidity.
 - **Função `pushGen(Gender gen)`**:
   - Retorna uma lista de nomes das pessoas que possuem o gênero especificado (`Male` ou `Female`).
-- **Código para ler enums com Web3.js**:
 
-- [Buscando enums](../playground/aula9/readEnum.js) 
+
+- [Buscando enums](../playground/aula9/readEnum.js)
 
 - **Explicação**:
   - Usamos `0` e `1` como os valores de `Gender`, pois o Solidity representa enums como inteiros.
@@ -48,16 +47,15 @@ Arrays são uma estrutura fundamental em Solidity para armazenar listas de dados
 
 - **Função `getAllNames()`**:
   - Retorna uma lista de todos os nomes das pessoas no array `peoples`.
-- **Função `peoples(uint index)`**:
-  - Esse é um getter automático que permite acessar qualquer elemento do array `peoples` diretamente pelo índice.
-- **Código para ler arrays com Web3.js**:
+- **Função `getAllPeople()`**:
+  - Esse é um getter automático que retorna todos os elemento do array `peoples`.
 
 
 - [Buscando array](../playground/aula9/readArray.js)
 
 - **Explicação**:
   - `getAllNames` traz todos os nomes no array `peoples`.
-  - `peoples(index)` permite acessar diretamente o struct no índice especificado, retornando todos os dados do struct `People`.
+  - `getAllPeople` retorna uma lista de structs.
 
 ## Conclusão
 
