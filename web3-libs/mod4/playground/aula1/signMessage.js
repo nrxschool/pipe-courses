@@ -1,34 +1,31 @@
-const { ethers } = require('ethers');
-const readline = require('readline');
+import { Web3 } from "web3";
+import readline from "readline";
 
-const wallet = ethers.Wallet.createRandom();
-console.log('Endereço:', wallet.address);
-console.log('Chave Privada:', wallet.privateKey);
+const web3 = new Web3();
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-async function signMessage() {
-    // Substituir prompt por readline
-    rl.question("Digite a mensagem para assinar: ", async (message) => {
-        try {
-            // Signing the message
-            const sig = await wallet.signMessage(message);
+// Function to sign a message
+const signMessage = async () => {
+  rl.question("Enter the message to sign: ", async (message) => {
+    rl.close();
 
-            // Validating the signed message
-            const signerAddress = ethers.verifyMessage(message, sig);
-            console.log('Endereço do Signatário:', signerAddress);
-            console.log('Assinatura:', sig);
+    // Create Account
+    const account = web3.eth.accounts.wallet.create(1)[0];
+    console.log("Account:", account);
 
-        } catch (error) {
-            console.error("Erro:", error);
-        } finally {
-            // Fechar a interface readline
-            rl.close();
-        }
-    });
-}
+    // Sign the message
+    const signature = await web3.eth.accounts.sign(message, account.privateKey);
+    console.log("Signature:", signature.signature);
 
+    // Verify the signature
+    const verify = await web3.eth.accounts.recover("outra messagem", signature.signature);
+    console.log("Verification:", verify === account.address ? "Success" : "Failed");
+  });
+};
+
+// Call the function to sign a message
 signMessage();

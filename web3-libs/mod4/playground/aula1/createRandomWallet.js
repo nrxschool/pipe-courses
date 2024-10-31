@@ -1,5 +1,7 @@
-const { ethers } = require('ethers'); 
+import { Web3 } from "web3";
 
-const wallet = ethers.Wallet.createRandom()
-console.log('Endereço:', wallet.address);
-console.log('Chave Privada:', wallet.privateKey);
+const web3 = new Web3();
+
+// Create Account
+const account = web3.eth.accounts.wallet.create(1);
+console.log(account);

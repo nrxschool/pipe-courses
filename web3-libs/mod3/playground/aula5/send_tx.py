@@ -15,6 +15,7 @@ try:
     nonce = web3.eth.get_transaction_count(account.address)
 
     # Define o destinatário e o valor da transação
+    # EOA Externlly Owned Account
     to_address = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
     value_in_ether = "1"
 
@@ -41,6 +42,7 @@ try:
 
     # Assina a transação
     signed_transaction = web3.eth.account.sign_transaction(transaction, PRIVATE_KEY)
+    print(signed_transaction.raw_transaction)
 
     # Envia a transação
     receipt = web3.eth.send_raw_transaction(signed_transaction.raw_transaction)

@@ -1,6 +1,7 @@
-import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { Web3 } from "web3";
 
-const privateKey = generatePrivateKey()
-const account = privateKeyToAccount(privateKey)
-console.log('Endereço:', account.address)
-console.log('Chave Privada:', privateKey)
+const web3 = new Web3();
+
+// Create Account
+const account = web3.eth.accounts.wallet.create(1);
+console.log(account);

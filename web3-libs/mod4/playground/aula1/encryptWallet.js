@@ -1,41 +1,50 @@
-const { ethers } = require('ethers'); 
-readline = require('readline');
+import { Web3 } from "web3";
+import readline from "readline";
 
-const wallet = ethers.Wallet.createRandom()
-console.log('Endereço:', wallet.address);
-console.log('Chave Privada:', wallet.privateKey);
+const web3 = new Web3();
 
+const account = web3.eth.accounts.wallet.create(1)[0];
+const privateKey = account.privateKey;
+console.log("Chave Privada:", privateKey);
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
+// Função para solicitar a senha e encriptar a chave privada
+const encryptPrivateKey = async () => {
+  rl.question("Digite sua senha para encriptar: ", async (password) => {
+    rl.close();
 
-async function encryptPrivateKey() {
-    const password = await new Promise((resolve) => {
-        rl.question("Digite sua senha para encriptar: ", resolve);
-    });
-    const encryptedJson = await wallet.encrypt(password); // Sem alterações
-    console.log("Keystore Encriptado:", encryptedJson);
+    const keystore = await web3.eth.accounts.encrypt(privateKey, password);
+    console.log("Keystore Encriptado:", JSON.stringify(keystore, null, 2));
 
-    // Chama a função para decriptar
-    decryptKeystore(encryptedJson);
-}
+    // Chamar a função para decriptar
+    decryptKeystore(keystore);
+  });
+};
 
-// Função para pedir a senha e decriptar a chave privada
-async function decryptKeystore(encryptedJson) {
-    const password = await new Promise((resolve) => {
-        rl.question("Digite sua senha para decriptar: ", resolve);
-    });
+// Função para solicitar a senha e decriptar a chave privada
+const decryptKeystore = (keystore) => {
+  const rlDecrypt = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  rlDecrypt.question("Digite sua senha para decriptar: ", async (password) => {
+    rlDecrypt.close();
+
     try {
-        const decryptedWallet = await ethers.Wallet.fromEncryptedJson(encryptedJson, password); // Atualizado para fromEncryptedJson
-        console.log("Conta Decriptada:", decryptedWallet);
+      const decryptedAccount = await web3.eth.accounts.decrypt(keystore, password);
+      console.log("Conta Decriptada:", decryptedAccount);
     } catch (error) {
-        console.log("Erro ao decriptar a chave:", error.message);
+      console.error("Erro ao decriptar a chave:", error.message);
     }
-}
+  });
+};
 
+cons0x4975335475faf2b75db302205b61f95c7a59dc73818e646ee6c05f77cc8db652
 
-// Start the process
+// Inicia o processo
 encryptPrivateKey();
