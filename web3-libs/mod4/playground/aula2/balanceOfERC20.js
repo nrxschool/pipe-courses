@@ -5,7 +5,7 @@ import readline from "readline";
 // 2. Configure o provider
 const RPC_URL = "http://127.0.0.1:8545";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
-const daiAbi = [
+const abi = [
   {
     constant: true,
     inputs: [{ name: "_owner", type: "address" }],
@@ -37,9 +37,9 @@ const askForAccountAddress = (contractAddress) => {
 
 // Função para verificar o saldo
 const checkBalance = (contractAddress, accountAddress) => {
-  const daiContract = new ethers.Contract(contractAddress, daiAbi, provider);
+  const contract = new ethers.Contract(contractAddress, abi, provider);
 
-  daiContract.balanceOf(accountAddress)
+  contract.balanceOf(accountAddress)
     .then((balance) => {
       console.log("Saldo do Token:", ethers.formatEther(balance));
     })

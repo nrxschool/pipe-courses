@@ -7,5 +7,6 @@ const provider = new ethers.JsonRpcProvider(RPC_URL);
 
 // 3. Verifique a conexão
 provider.getBlockNumber().then((number) => {
+  console.log("Blockchain connected with success!")
   console.log(`Block number ${number}`);
 });
