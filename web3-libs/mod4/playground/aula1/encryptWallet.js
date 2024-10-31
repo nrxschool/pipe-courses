@@ -41,6 +41,7 @@ const decryptWallet = (encryptedWallet) => {
         password
       );
       console.log("Wallet Decriptado:", decryptedWallet.address);
+      console.log("Wallet Decriptado:", decryptedWallet.privateKey);
     } catch (error) {
       console.error("Erro ao decriptar a chave:", error.message);
     }

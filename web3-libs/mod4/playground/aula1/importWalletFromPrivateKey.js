@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
 // Create Account
-const PRIVATE_KEY = "0xb762c5177d93ae67873060b655b652eecddca5085d918c2de4ca23b1e6be4812";
+const PRIVATE_KEY = "0x2045decb6a28c0e8a68995c150645d55b8ce2dbff367565962cad2f94edbc018";
 const wallet = new ethers.Wallet(PRIVATE_KEY);
 console.log(wallet.address);
