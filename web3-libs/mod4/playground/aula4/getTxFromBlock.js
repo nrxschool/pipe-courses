@@ -1,11 +1,11 @@
-// 1. Instale e importe a biblioteca Ethers
 import { ethers } from "ethers";
 import readline from "readline";
 
-// 2. Configure o provider
+// 1. Configure o provider
 const RPC_URL = "http://127.0.0.1:8545";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 
+// 2. Função principal
 async function main() {
   console.log("Do you want to consult some transactions?");
 
@@ -17,39 +17,37 @@ async function main() {
   rl.question(
     "Enter block hash (or none for the latest block): ",
     async (answer) => {
-      if (answer === "") {
-        const currentBlockNumber = await provider.getBlockNumber();
-        const block = await provider.getBlock(currentBlockNumber);
-        const txCount = block.transactionCount;
-        console.log(`This block hash ${txCount} Transaction`);
-        
-        const transactions = await Promise.all(
-          block.transactions.map(txHash => provider.getTransaction(txHash))
-        );
-        
-        console.log(transactions);
-      } else {
-        // Verifica se o hash do bloco é válido
-        if (!/^0x[a-fA-F0-9]{64}$/.test(answer)) {
-          console.error("Invalid block hash. Please enter a valid hash.");
-          rl.close();
-          return;
-        }
+      try {
+        if (answer === "") {
+          // Obter o número do último bloco
+          const currentBlockNumber = await provider.getBlockNumber();
+          const currentBlock = await provider.getBlock(currentBlockNumber);
 
-        const block = await provider.getBlock(answer);
-        if (!block) {
-          console.error("Block not found. Please check the hash.");
-        } else {
-          const txCount = block.transactionCount;
+          // Obter a contagem de transações no bloco
+          const txCount = currentBlock.transactions.length;
           console.log(`This block hash ${txCount} Transaction`);
 
-          // Obtém as transações do bloco
-          const transactions = await Promise.all(
-            block.transactions.map(txHash => provider.getTransaction(txHash))
-          );
-          
-          console.log(transactions);
+          // Exibir uma transação do bloco (a primeira, por exemplo)
+          if (txCount > 0) {
+            const transaction = await provider.getTransaction(currentBlock.transactions[0]);
+            console.log(transaction);
+          }
+        } else {
+          // Obter o bloco pelo hash
+          const block = await provider.getBlock(answer);
+
+          // Obter a contagem de transações no bloco
+          const txCount = block.transactions.length;
+          console.log(`This block hash ${txCount} Transaction`);
+
+          // Exibir a transação pelo índice
+          if (txCount > 0) {
+            const transaction = await provider.getTransaction(block.transactions[0]);
+            console.log(transaction);
+          }
         }
+      } catch (error) {
+        console.error("Erro ao obter transações:", error);
       }
       rl.close();
     }
