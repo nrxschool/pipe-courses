@@ -1,7 +1,9 @@
-import { Web3 } from "web3";
+import { ethers } from "ethers";
 
-const web3 = new Web3();
-
-// Create Account
-const account = web3.eth.accounts.wallet.create(1);
-console.log(account);
+// Create random wallet
+const wallet = ethers.Wallet.createRandom();
+console.table({
+  address: wallet.address,
+  privateKey: wallet.privateKey,
+  publicKey: wallet.publicKey
+});

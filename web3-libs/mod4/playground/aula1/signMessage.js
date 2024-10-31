@@ -1,7 +1,5 @@
-import { Web3 } from "web3";
+import { ethers, Signature, verifyMessage } from "ethers";
 import readline from "readline";
-
-const web3 = new Web3();
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -11,19 +9,26 @@ const rl = readline.createInterface({
 // Function to sign a message
 const signMessage = async () => {
   rl.question("Enter the message to sign: ", async (message) => {
-    rl.close();
-
     // Create Account
-    const account = web3.eth.accounts.wallet.create(1)[0];
-    console.log("Account:", account);
+    const signer = ethers.Wallet.createRandom();
+    console.log("Account:", signer.address);
 
     // Sign the message
-    const signature = await web3.eth.accounts.sign(message, account.privateKey);
-    console.log("Signature:", signature.signature);
+    const rawSig = await signer.signMessage(message);
+    console.log("Signature (raw):", rawSig);
 
-    // Verify the signature
-    const verify = await web3.eth.accounts.recover("outra messagem", signature.signature);
-    console.log("Verification:", verify === account.address ? "Success" : "Failed");
+    // Split the signature
+    const sig = Signature.from(rawSig);
+    console.table({ v: sig.v, r: sig.r, s: sig.s });
+
+    const result = verifyMessage(message, rawSig);
+
+    console.log(
+      "Verification:",
+      result === signer.address ? "Success" : "Failed"
+    );
+
+    rl.close();
   });
 };
 
