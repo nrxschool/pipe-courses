@@ -1,10 +1,13 @@
-// 1. Instale e importe a biblioteca Web3.js
-import Web3 from "web3";
+// 1. Instale e importe a biblioteca Viem
+import { createPublicClient, http } from 'viem';
+import { mainnet } from 'viem/chains';
 import readline from "readline";
 
 // 2. Configure o provider
-const RPC_URL = "http://127.0.0.1:8545";
-const web3 = new Web3(RPC_URL);
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http('http://127.0.0.1:8545'),
+});
 const daiAbi = [
   {
     constant: true,
@@ -36,21 +39,16 @@ const askForAccountAddress = (contractAddress) => {
 };
 
 // Função para verificar o saldo
-const checkBalance = (contractAddress, accountAddress) => {
-  const daiContract = new web3.eth.Contract(daiAbi, contractAddress);
+const checkBalance = async (contractAddress, accountAddress) => {
+  const balance = await client.readContract({
+    address: contractAddress,
+    abi: daiAbi,
+    functionName: 'balanceOf',
+    args: [accountAddress],
+  });
 
-  daiContract.methods
-    .balanceOf(accountAddress)
-    .call()
-    .then((balance) => {
-      console.log("Saldo do Token:", web3.utils.fromWei(balance, "ether"));
-    })
-    .catch((error) => {
-      console.error("Erro ao consultar o saldo de DAI:", error);
-    })
-    .finally(() => {
-      rl.close();
-    });
+  console.log("Saldo do Token:", balance.toString());
+  rl.close();
 };
 
 // Inicia o processo
