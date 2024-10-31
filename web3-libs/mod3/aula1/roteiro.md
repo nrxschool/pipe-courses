@@ -44,7 +44,7 @@ Para gerenciar uma conta na blockchain, é necessário criar uma carteira, compo
 
 Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. Esse processo cria uma assinatura digital única usando a chave privada da conta.
 
-- [Assinando Messagens](../playground/aula1/signMessage.js)
+- [Assinando Messagens](../playground/aula1/sign_message.py)
 
 ---
 
