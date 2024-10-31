@@ -34,9 +34,9 @@ pip install web3
 
 Para gerenciar uma conta na blockchain, é necessário criar uma carteira, composta por uma chave pública e uma chave privada.
 
-- [Criação de Carteira Aleatória](../playground/aula1/createRandomWallet.js)
-- [Importando Carteira de uma Chave Privada](../playground/aula1/importWalletFromPrivateKey.js)
-- [Armazenando Carteiras](../playground/aula1/encryptWallet.js)
+- [Criação de Carteira Aleatória](../playground/aula1/create_random_wallet.py)
+- [Importando Carteira de uma Chave Privada](../playground/aula1/import_wallet_from_private_key.py)
+- [Armazenando Carteiras](../playground/aula1/encrypt_wallet.py)
 
 ---
 
@@ -44,7 +44,7 @@ Para gerenciar uma conta na blockchain, é necessário criar uma carteira, compo
 
 Assinar uma mensagem é útil para autenticação e verificação de identidade sem realizar transações on-chain. Esse processo cria uma assinatura digital única usando a chave privada da conta.
 
-- [Assinando Messagens](../playground/aula1/signMessage.js)
+- [Assinando Messagens](../playground/aula1/sign_message.py)
 
 ---
 
