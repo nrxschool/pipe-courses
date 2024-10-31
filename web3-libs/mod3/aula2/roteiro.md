@@ -2,11 +2,11 @@
 
 ## Abertura
 
-Bem-vindo à segunda aula do Módulo 2! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Web3.js**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
+Bem-vindo à segunda aula do Módulo 2! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Web3.py**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
 
 ### Programa da aula:
 
-1. Como conectar-se à blockchain com Web3.js
+1. Como conectar-se à blockchain com Web3.py
 2. Lendo o saldo de um endereço de Ether
 3. Convertendo o saldo para unidades de fácil leitura (ether, gwei, wei)
 4. Lendo o saldo de tokens ERC-20
@@ -15,11 +15,11 @@ Ao final desta aula, você será capaz de consultar saldos e convertê-los em di
 
 ---
 
-## 1. Como conectar-se à blockchain com Web3.js
+## 1. Como conectar-se à blockchain com Web3.py
 
 Para interagir com a blockchain, é necessário se conectar a um **provider**. O provider atua como um canal entre o seu código e a blockchain, e hoje usaremos o Infura para configurar nosso provedor.
 
-- [Conectar com um Provider](../playground/aula2/connect.js)
+- [Conectar com um Provider](../playground/aula2/connect.py)
 
 ---
 
@@ -27,15 +27,15 @@ Para interagir com a blockchain, é necessário se conectar a um **provider**. O
 
 Com a conexão configurada, podemos ler o saldo de qualquer endereço na blockchain. Os saldos de contas Ethereum são armazenados em **wei** por padrão, que é a menor unidade de Ether.
 
-- [Obter o Saldo de uma endereço](../playground/aula2/balanceOf.js)
+- [Obter o Saldo de uma endereço](../playground/aula2/balance_of.py)
 
 ---
 
 ## 3. Convertendo o saldo para unidades de fácil leitura
 
-Os valores de saldo são retornados em **wei**, mas geralmente é mais útil exibi-los em **ether** ou **gwei**. A Web3.js facilita essa conversão com métodos de utilidade. Podemos converter o saldo para ether e exibi-lo em uma unidade mais amigável.
+Os valores de saldo são retornados em **wei**, mas geralmente é mais útil exibi-los em **ether** ou **gwei**. A Web3.py facilita essa conversão com métodos de utilidade. Podemos converter o saldo para ether e exibi-lo em uma unidade mais amigável.
 
-- [Exemplo de Conversão](../playground/aula2/convertWei.js)
+- [Exemplo de Conversão](../playground/aula2/convert_wei.py)
 
 ### Unidades de Conversão Comuns
 
@@ -71,13 +71,13 @@ Para obter o saldo de um token ERC-20, precisamos conectar-se ao contrato do tok
 
 Neste exemplo, estamos convertendo o saldo de DAI para **ether** (o que representa uma unidade decimal ajustada para tokens ERC-20), mas a unidade depende do contrato do token.
 
-- [Obter Saldo de ERC20](../playground/aula2/balanceOfERC20.js)
+- [Obter Saldo de ERC20](../playground/aula2/balance_of_erc20.py)
 
 ---
 
 ## Conclusão
 
-Nesta aula, exploramos como ler saldos da blockchain com Web3.js, incluindo:
+Nesta aula, exploramos como ler saldos da blockchain com Web3.py, incluindo:
 
 - Conexão com um **provider**.
 - Leitura do saldo de Ether.
