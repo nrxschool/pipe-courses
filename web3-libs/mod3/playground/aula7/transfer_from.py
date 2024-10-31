@@ -38,10 +38,10 @@ eve_balance = contract.functions.balanceOf(EVE_ADDRESS).call()
 allowance = contract.functions.allowance(ALICE_ADDRESS, BOB_ADDRESS).call()
 
 print("Balances and Allowances:")
-print(f"Alice's balance: {web3.from_wei(alice_balance, 'ether')} ether")
-print(f"Bob's balance: {web3.from_wei(bob_balance, 'ether')} ether")
-print(f"Eve's balance: {web3.from_wei(eve_balance, 'ether')} ether")
-print(f"Allowance for Bob from Alice: {web3.from_wei(allowance, 'ether')} ether")
+print(f"Alice's balance: {web3.from_wei(alice_balance, 'ether')} TOKENs")
+print(f"Bob's balance: {web3.from_wei(bob_balance, 'ether')} TOKENs")
+print(f"Eve's balance: {web3.from_wei(eve_balance, 'ether')} TOKENs")
+print(f"Allowance for Bob from Alice: {web3.from_wei(allowance, 'ether')} TOKENs")
 
 # Bob signs the tx sending 1 token from Alice to Eve
 bob_account = web3.eth.account.from_key(BOB_PRIVATE_KEY)
@@ -63,9 +63,9 @@ new_eve_balance = contract.functions.balanceOf(EVE_ADDRESS).call()
 new_allowance = contract.functions.allowance(ALICE_ADDRESS, BOB_ADDRESS).call()
 
 print("\nNew Balances and Allowances:")
-print(f"Alice's new balance: {web3.from_wei(new_alice_balance, 'ether')} ether")
-print(f"Bob's new balance: {web3.from_wei(new_bob_balance, 'ether')} ether")
-print(f"Eve's new balance: {web3.from_wei(new_eve_balance, 'ether')} ether")
+print(f"Alice's new balance: {web3.from_wei(new_alice_balance, 'ether')} TOKENs")
+print(f"Bob's new balance: {web3.from_wei(new_bob_balance, 'ether')} TOKENs")
+print(f"Eve's new balance: {web3.from_wei(new_eve_balance, 'ether')} TOKENs")
 print(
     f"New allowance for Bob from Alice: {web3.from_wei(new_allowance, 'ether')} ether"
 )
