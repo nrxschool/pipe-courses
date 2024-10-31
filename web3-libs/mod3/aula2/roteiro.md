@@ -2,7 +2,7 @@
 
 ## Abertura
 
-Bem-vindo à segunda aula do Módulo 2! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Web3.py**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
+Bem-vindo à segunda aula do Módulo 3! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Web3.py**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
 
 ### Programa da aula:
 
