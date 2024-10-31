@@ -21,21 +21,35 @@ async function main() {
         const currentBlockNumber = await provider.getBlockNumber();
         const block = await provider.getBlock(currentBlockNumber);
         const txCount = block.transactionCount;
-
         console.log(`This block hash ${txCount} Transaction`);
         
-        // Alterado para obter transações separadamente
         const transactions = await Promise.all(
           block.transactions.map(txHash => provider.getTransaction(txHash))
         );
         
         console.log(transactions);
       } else {
-        const tx = await provider.getTransaction(answer);
-        const block = await provider.getBlock(tx.blockNumber);
-        const txCount = block.transactionCount;
-        console.log(`This block hash ${txCount} Transaction`);
-        console.log(tx);
+        // Verifica se o hash do bloco é válido
+        if (!/^0x[a-fA-F0-9]{64}$/.test(answer)) {
+          console.error("Invalid block hash. Please enter a valid hash.");
+          rl.close();
+          return;
+        }
+
+        const block = await provider.getBlock(answer);
+        if (!block) {
+          console.error("Block not found. Please check the hash.");
+        } else {
+          const txCount = block.transactionCount;
+          console.log(`This block hash ${txCount} Transaction`);
+
+          // Obtém as transações do bloco
+          const transactions = await Promise.all(
+            block.transactions.map(txHash => provider.getTransaction(txHash))
+          );
+          
+          console.log(transactions);
+        }
       }
       rl.close();
     }
