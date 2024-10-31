@@ -1,31 +1,52 @@
-import { Web3 } from "web3";
-import readline from "readline";
+import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts'
+import { verifyMessage } from 'viem'
+import { createInterface } from 'readline'
+import { stdin as input, stdout as output } from 'process'
 
-const web3 = new Web3();
+// Criar uma nova carteira
+const privateKey = generatePrivateKey()
+const account = privateKeyToAccount(privateKey)
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+console.log('Endereço:', account.address)
+console.log('Chave Privada:', privateKey)
 
-// Function to sign a message
-const signMessage = async () => {
-  rl.question("Enter the message to sign: ", async (message) => {
-    rl.close();
+// Configurar interface readline para input do usuário
+const rl = createInterface({
+  input,
+  output
+})
 
-    // Create Account
-    const account = web3.eth.accounts.wallet.create(1)[0];
-    console.log("Account:", account);
+async function signMessage() {
+  // Usar Promise para trabalhar com readline de forma assíncrona
+  const message = await new Promise((resolve) => {
+    rl.question("Digite a mensagem para assinar: ", resolve)
+  })
 
-    // Sign the message
-    const signature = await web3.eth.accounts.sign(message, account.privateKey);
-    console.log("Signature:", signature.signature);
+  try {
+    // Assinar a mensagem
+    const signature = await account.signMessage({
+      message
+    })
+    console.log('Assinatura:', signature)
 
-    // Verify the signature
-    const verify = await web3.eth.accounts.recover("outra messagem", signature.signature);
-    console.log("Verification:", verify === account.address ? "Success" : "Failed");
-  });
-};
+    // Verificar a assinatura
+    const isValid = await verifyMessage({
+      address: account.address,
+      message,
+      signature
+    })
 
-// Call the function to sign a message
-signMessage();
+    console.log('Assinatura é válida?', isValid)
+    console.log('\nDetalhes da Assinatura:')
+    console.log('Endereço do Signatário:', account.address)
+    console.log('Mensagem Original:', message)
+    console.log('Assinatura Completa:', signature)
+
+  } catch (error) {
+    console.error("Erro durante a assinatura:", error)
+  } finally {
+    rl.close()
+  }
+}
+
+signMessage()
