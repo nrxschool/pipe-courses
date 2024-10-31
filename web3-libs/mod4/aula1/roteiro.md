@@ -1,7 +1,3 @@
-Aqui está o texto atualizado para a versão 6.x do Ethers.js:
-
----
-
 # Aula 1: Como criar carteiras com Ethers.js
 
 ## Abertura
@@ -88,7 +84,3 @@ Hoje instalamos e configuramos o Ethers.js v6, exploramos suas principais difere
 ## Próxima Aula
 
 Na próxima aula, vamos aprender a ler saldos da blockchain utilizando o Ethers.js, permitindo que você obtenha informações financeiras de contas e explore dados on-chain. Até lá!
-
---- 
-
-Essa versão cobre os mesmos tópicos da aula original, adaptando o uso de carteiras e assinaturas para a biblioteca Ethers.js v6.x.
