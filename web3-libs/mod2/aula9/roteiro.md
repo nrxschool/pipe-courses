@@ -21,16 +21,8 @@ No Solidity, uma `struct` permite agrupar múltiplos dados de tipos variados em 
   - O retorno é do tipo `People`, ou seja, inclui o nome, idade e gênero da pessoa.
 - **Código para ler o `struct` com Web3.js**:
 
-  ```javascript
-  const contract = new web3.eth.Contract(abi, contractAddress);
 
-  async function readPersonStruct() {
-    const person = await contract.methods.getPerson().call();
-    console.log("Nome:", person.name);
-    console.log("Idade:", person.age);
-    console.log("Gênero:", person.gender); // Aqui o gênero será retornado como número (0 ou 1)
-  }
-  ```
+- [Buscando um struct](../playground/aula9/readStructs.js)
 
 - **Conversão do Gênero**:
   - Note que o `gender` é retornado como um número (0 para `Male` e 1 para `Female`). Podemos converter esse valor manualmente ou usar uma função para interpretar esses dados.
@@ -45,19 +37,7 @@ Enums em Solidity são tipos personalizados que ajudam a restringir valores a um
   - Retorna uma lista de nomes das pessoas que possuem o gênero especificado (`Male` ou `Female`).
 - **Código para ler enums com Web3.js**:
 
-  ```javascript
-  async function readGenderEnum() {
-    const genderValue = await contract.methods.getGender().call();
-    const gender = genderValue === "0" ? "Male" : "Female";
-    console.log("Gênero:", gender);
-  }
-
-  async function getPeopleByGender(gender) {
-    const gen = gender === "Male" ? 0 : 1;
-    const peopleNames = await contract.methods.pushGen(gen).call();
-    console.log("Nomes de pessoas com gênero " + gender + ":", peopleNames);
-  }
-  ```
+- [Buscando enums](../playground/aula9/readEnum.js) 
 
 - **Explicação**:
   - Usamos `0` e `1` como os valores de `Gender`, pois o Solidity representa enums como inteiros.
@@ -72,19 +52,8 @@ Arrays são uma estrutura fundamental em Solidity para armazenar listas de dados
   - Esse é um getter automático que permite acessar qualquer elemento do array `peoples` diretamente pelo índice.
 - **Código para ler arrays com Web3.js**:
 
-  ```javascript
-  async function readAllNames() {
-    const names = await contract.methods.getAllNames().call();
-    console.log("Todos os nomes no array:", names);
-  }
 
-  async function readPersonByIndex(index) {
-    const person = await contract.methods.peoples(index).call();
-    console.log("Nome:", person.name);
-    console.log("Idade:", person.age);
-    console.log("Gênero:", person.gender); // Novamente, gender será retornado como número
-  }
-  ```
+- [Buscando array](../playground/aula9/readArray.js)
 
 - **Explicação**:
   - `getAllNames` traz todos os nomes no array `peoples`.

@@ -13,7 +13,11 @@ contract Complex {
         Gender gender;
     }
 
-    People[] public peoples;
+    People[] peoples;
+
+    function getAllPeople() external view returns (People[] memory) {
+        return peoples;
+    }
 
     function pushPeople(People memory person) external {
         peoples.push(person);

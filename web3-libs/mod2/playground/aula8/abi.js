@@ -8,6 +8,28 @@ const abi = [
   },
   {
     type: "function",
+    name: "getAllPeople",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "tuple[]",
+        internalType: "struct Complex.People[]",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          { name: "age", type: "uint8", internalType: "uint8" },
+          {
+            name: "gender",
+            type: "uint8",
+            internalType: "enum Complex.Gender",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "getGender",
     inputs: [],
     outputs: [{ name: "", type: "uint8", internalType: "enum Complex.Gender" }],
@@ -31,21 +53,6 @@ const abi = [
             internalType: "enum Complex.Gender",
           },
         ],
-      },
-    ],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "peoples",
-    inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    outputs: [
-      { name: "name", type: "string", internalType: "string" },
-      { name: "age", type: "uint8", internalType: "uint8" },
-      {
-        name: "gender",
-        type: "uint8",
-        internalType: "enum Complex.Gender",
       },
     ],
     stateMutability: "view",
