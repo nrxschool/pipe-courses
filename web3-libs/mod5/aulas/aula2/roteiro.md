@@ -2,11 +2,11 @@
 
 ## Abertura
 
-Bem-vindo à segunda aula do Módulo 2! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Web3.js**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
+Bem-vindo à segunda aula do Módulo 2! Hoje, vamos explorar como ler o saldo de endereços na blockchain Ethereum usando a biblioteca **Viem**. Saber como consultar saldos de endereços é uma habilidade fundamental para integrar seu sistema Web3, permitindo que você construa funcionalidades como exibir o saldo de usuários e verificar a quantidade de tokens ou Ether em uma conta.
 
 ### Programa da aula:
 
-1. Como conectar-se à blockchain com Web3.js
+1. Como conectar-se à blockchain com Viem
 2. Lendo o saldo de um endereço de Ether
 3. Convertendo o saldo para unidades de fácil leitura (ether, gwei, wei)
 4. Lendo o saldo de tokens ERC-20
@@ -15,7 +15,7 @@ Ao final desta aula, você será capaz de consultar saldos e convertê-los em di
 
 ---
 
-## 1. Como conectar-se à blockchain com Web3.js
+## 1. Como conectar-se à blockchain com Viem
 
 Para interagir com a blockchain, é necessário se conectar a um **provider**. O provider atua como um canal entre o seu código e a blockchain, e hoje usaremos o Infura para configurar nosso provedor.
 
@@ -33,7 +33,7 @@ Com a conexão configurada, podemos ler o saldo de qualquer endereço na blockch
 
 ## 3. Convertendo o saldo para unidades de fácil leitura
 
-Os valores de saldo são retornados em **wei**, mas geralmente é mais útil exibi-los em **ether** ou **gwei**. A Web3.js facilita essa conversão com métodos de utilidade. Podemos converter o saldo para ether e exibi-lo em uma unidade mais amigável.
+Os valores de saldo são retornados em **wei**, mas geralmente é mais útil exibi-los em **ether** ou **gwei**. O Viem facilita essa conversão com métodos de utilidade. Podemos converter o saldo para ether e exibi-lo em uma unidade mais amigável.
 
 - [Exemplo de Conversão](../playground/aula2/convertWei.js)
 
@@ -77,7 +77,7 @@ Neste exemplo, estamos convertendo o saldo de DAI para **ether** (o que represen
 
 ## Conclusão
 
-Nesta aula, exploramos como ler saldos da blockchain com Web3.js, incluindo:
+Nesta aula, exploramos como ler saldos da blockchain com Viem, incluindo:
 
 - Conexão com um **provider**.
 - Leitura do saldo de Ether.
