@@ -2,7 +2,7 @@
 
 ## Abertura
 
-Olá! Bem-vindo à quinta aula do curso sobre Ethers v4.x. Hoje, vamos abordar a criação de transações simples na blockchain Ethereum, focando no envio de Ether de uma conta para outra. Aprender a realizar transações é um passo fundamental para quem deseja interagir com a blockchain de forma prática, e nesta aula você ganhará confiança para começar a trabalhar com transferências de ativos.
+Olá! Bem-vindo à quinta aula do curso sobre Ethers v6.x. Hoje, vamos abordar a criação de transações simples na blockchain Ethereum, focando no envio de Ether de uma conta para outra. Aprender a realizar transações é um passo fundamental para quem deseja interagir com a blockchain de forma prática, e nesta aula você ganhará confiança para começar a trabalhar com transferências de ativos.
 
 ### Programação:
 
@@ -32,7 +32,7 @@ Esse processo é totalmente descentralizado, o que significa que a transação p
 
 ## 3. Executando e Verificando a Transação
 
-- [Enviando Transação](../playground/aula5/sendTx.js)
+- [Enviando Transação](../../playground/aula5/sendTx.js)
 
 ## Conclusão
 
