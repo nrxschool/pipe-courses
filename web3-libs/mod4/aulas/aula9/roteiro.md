@@ -21,7 +21,7 @@ No Solidity, uma `struct` permite agrupar múltiplos dados de tipos variados em 
   - O retorno é do tipo `People`, ou seja, inclui o nome, idade e gênero da pessoa.
 
 
-- [Buscando um struct](../playground/aula9/readStructs.js)
+- [Buscando um struct](../../playground/aula9/readStructs.js)
 
 - **Conversão do Gênero**:
   - Note que o `gender` é retornado como um número (0 para `Male` e 1 para `Female`). Podemos converter esse valor manualmente ou usar uma função para interpretar esses dados.
@@ -36,7 +36,7 @@ Enums em Solidity são tipos personalizados que ajudam a restringir valores a um
   - Retorna uma lista de nomes das pessoas que possuem o gênero especificado (`Male` ou `Female`).
 
 
-- [Buscando enums](../playground/aula9/readEnum.js)
+- [Buscando enums](../../playground/aula9/readEnum.js)
 
 - **Explicação**:
   - Usamos `0` e `1` como os valores de `Gender`, pois o Solidity representa enums como inteiros.
@@ -51,7 +51,7 @@ Arrays são uma estrutura fundamental em Solidity para armazenar listas de dados
   - Esse é um getter automático que retorna todos os elemento do array `peoples`.
 
 
-- [Buscando array](../playground/aula9/readArray.js)
+- [Buscando array](../../playground/aula9/readArray.js)
 
 - **Explicação**:
   - `getAllNames` traz todos os nomes no array `peoples`.

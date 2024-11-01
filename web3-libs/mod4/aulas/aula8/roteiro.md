@@ -17,7 +17,7 @@ Olá! Bem-vindo à nossa décima segunda aula sobre Ethers.js v6 Nesta aula, vam
 
 Para que possamos enviar dados complexos, precisamos garantir que o contrato inteligente em Solidity está preparado para receber esses tipos de dados. Vamos ver um exemplo de contrato que aceita Structs, Enums e Arrays em uma única função.
 
-- [Contrato em Solidity](../playground/aula8/complex.sol)
+- [Contrato em Solidity](../../playground/aula8/complex.sol)
 
 ## 2. Criando e enviando transações com Structs
 
@@ -31,7 +31,7 @@ Para enviar dados para um `struct`, você precisa passar cada atributo do `struc
 forge create aula8/complex.sol:Complex --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
 ```
 
-- [Enviando um Struct para o contrato](../playground/aula8/structs.js)
+- [Enviando um Struct para o contrato](../../playground/aula8/structs.js)
 
 ## 3. Lidando com Enums em transações
 
@@ -43,13 +43,13 @@ Para enviar um valor de `enum`, usamos o índice que representa o valor do `enum
 
 Ao enviar o valor `status = 1` no exemplo, estamos especificando que o pedido está no status `Shipped`.
 
-- [Enviando um Enum para o contrato](../playground/aula8/enum.js)
+- [Enviando um Enum para o contrato](../../playground/aula8/enum.js)
 
-## 4. Envio de Arrays e Arrays complexos
+## 4. Envio de Arrays
 
 Arrays podem ser enviados diretamente, contanto que o contrato Solidity esteja configurado para recebê-los como `memory`. No exemplo `placeOrder`, passamos um array de endereços para o parâmetro `recipients`.
 
-- [Enviando um Array para o contrato](../playground/aula8/array.js)
+- [Enviando um Array para o contrato](../../playground/aula8/array.js)
 
 ## Conclusão
 

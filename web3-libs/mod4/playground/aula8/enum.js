@@ -10,15 +10,15 @@ const PRIVATE_KEY =
 const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
 
 // Endereço do contrato
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 
 // Cria uma instância do contrato
 const contract = new ethers.Contract(contractAddress, abi, wallet);
 
 // Nova função para chamar pushGen
 async function getNamesByGender(gender) {
-  const names = await contract.pushGen(gender);
-  console.log(names);
+    const names = await contract.pushGen(gender);
+    console.log("Nomes recebidos:", names);
 }
 
 getNamesByGender(0);
