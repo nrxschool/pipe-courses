@@ -1,60 +1,35 @@
-import { Web3 } from "web3";
+import { createPublicClient, createWalletClient, http, parseEther } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
 
-// Configuração do provider
-const RPC_URL = "http://127.0.0.1:8545";
-const web3 = new Web3(RPC_URL);
+// Configuração do provider para leitura (cliente público)
+const publicClient = createPublicClient({
+  transport: http('http://127.0.0.1:8545'),
+});
 
-// Configuração do signer
+// Configuração do provider e do signer para transações (cliente com carteira)
 const PRIVATE_KEY =
-  "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-const account = web3.eth.accounts.wallet.add(PRIVATE_KEY)[0];
+  '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
+const walletClient = createWalletClient({
+  transport: http('http://127.0.0.1:8545'),
+});
+const account = privateKeyToAccount(PRIVATE_KEY);
 
-// Função para enviar uma transação
+// Função para enviar uma transação usando o cliente da carteira
 async function sendTransaction(account) {
   try {
-    // Obtém o nonce do endereço
-    const nonce = await web3.eth.getTransactionCount(account.address);
-
-    // Define o destinatário e o valor da transação
-    const toAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
-    const valueInEther = "1";
-
-    // Obtém o preço atual do gás da rede
-    const gasPrice = await web3.eth.getGasPrice();
-
-    // Calcula o gás necessário para a transação
-    const gasLimit = await web3.eth.estimateGas({
-      to: toAddress,
-      from: account.address,
-      value: web3.utils.toWei(valueInEther, "ether"),
-    });
-
-    // Monta a transação
-    const transaction = {
-      to: toAddress,
-      value: web3.utils.toWei(valueInEther, "ether"),
-      gas: gasLimit,
-      gasPrice: gasPrice,
-      nonce: nonce,
-    };
-
-    // Assina a transação
-    const signedTransaction = await web3.eth.accounts.signTransaction(
-      transaction,
-      PRIVATE_KEY
-    );
+    const toAddress = '0x70997970C51812dc3A010C7d01b50e0d17dc79C8';
+    const valueInEther = '1';
 
     // Envia a transação
-    const receipt = await web3.eth.sendSignedTransaction(
-      signedTransaction.rawTransaction
-    );
+    const hash = await walletClient.sendTransaction({
+      account,
+      to: toAddress,
+      value: parseEther(valueInEther),
+    });
 
-    console.log(
-      "Transação enviada com sucesso! Hash:",
-      receipt.transactionHash
-    );
+    console.log('Transação enviada com sucesso! Hash:', hash);
   } catch (error) {
-    console.error("Erro ao enviar a transação:", error);
+    console.error('Erro ao enviar a transação:', error);
   }
 }
 
