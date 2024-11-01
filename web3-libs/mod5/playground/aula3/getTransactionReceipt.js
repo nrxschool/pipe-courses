@@ -1,10 +1,12 @@
-// 1. Instale e importe a biblioteca Web3.js
-import Web3 from "web3";
+// 1. Instale e importe a biblioteca Viem
+import { createPublicClient, http } from 'viem';
 import readline from "readline";
 
-// 2. Configure o provider
-const RPC_URL = "http://127.0.0.1:8545";
-const web3 = new Web3(RPC_URL);
+
+// 2. Configure o client
+export const client = createPublicClient({
+  transport: http('http://127.0.0.1:8545'),
+});
 
 // 3. Obtenha o endereço da conta via readline input
 const rl = readline.createInterface({
@@ -12,15 +14,24 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("Digite o endereço da conta: ", (txHash) => {
-  web3.eth
-    .getTransactionReceipt(txHash)
-    .then((transaction) => {
-      console.log(`Transação de ${txHash}`, transaction);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar a transação:", error);
-    });
-  rl.close();
-});
+rl.question("Digite o hash da transação: ", async (txHash) => {
+  try {
+    console.log("Buscando transação para o hash:", txHash);
+    const transaction = await client.getTransactionReceipt({ hash: txHash });
+    
+    // Log para verificar o que está sendo retornado
+    console.log("Resposta da transação:", transaction);
 
+    // Verifique se a transação foi encontrada
+    if (!transaction) {
+      console.error("Transação não encontrada.");
+      return;
+    }
+
+    console.log(`Transação de ${txHash}`, transaction);
+  } catch (error) {
+    console.error("Erro ao buscar a transação:", error);
+  } finally {
+    rl.close();
+  }
+});
