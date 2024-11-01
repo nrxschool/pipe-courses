@@ -5,18 +5,26 @@ import { anvil } from "viem/chains";
 // 2. Configure o client
 const client = createPublicClient({
   transport: http(),
-  chain: anvil
+  chain: anvil,
 });
 
+// block = number
+// block = hash
+// block = tag
+
 async function fetchBlocks() {
-  const blockTypes = ["earliest", "latest", "pending", "finalized", "safe"];
+  const blockTags = ["earliest", "latest", "pending", "finalized", "safe"];
   const blocks = [];
-  
-  for (const type of blockTypes) {
-    const block = await client.getBlock({blockTag: type});
+
+  for (const tag of blockTags) {
+    const block = await client.getBlock({
+      blockTag: tag,
+      // blockHash: hash,
+      // blockNumber: number,
+    });
     blocks.push({
-      Type: type.toUpperCase(),
-      Block: block.number
+      tag: tag.toUpperCase(),
+      Block: block.number,
     });
   }
   console.table(blocks);

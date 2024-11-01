@@ -5,12 +5,10 @@ import { anvil } from "viem/chains";
 const PRIVATE_KEY =
   "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 
-const account = privateKeyToAccount(PRIVATE_KEY);
-
 const signer = createWalletClient({
   chain: anvil,
   transport: http(),
-  account,
+  account: privateKeyToAccount(PRIVATE_KEY),
 });
 
 // Função para enviar uma transação usando o cliente da carteira
