@@ -2,7 +2,7 @@
 
 ## Abertura
 
-Bem-vindo à primeira aula prática do Módulo 2, onde exploraremos **Viem** e seu uso na criação e gerenciamento de carteiras e assinaturas de mensagens. Viem é uma biblioteca moderna para interagir com a blockchain Ethereum, e hoje vamos focar na criação de carteiras e assinaturas digitais.
+Bem-vindo à primeira aula prática do Módulo 5, onde exploraremos **Viem** e seu uso na criação e gerenciamento de carteiras e assinaturas de mensagens. Viem é uma biblioteca moderna para interagir com a blockchain Ethereum, e hoje vamos focar na criação de carteiras e assinaturas digitais.
 
 ### Programa da aula:
 

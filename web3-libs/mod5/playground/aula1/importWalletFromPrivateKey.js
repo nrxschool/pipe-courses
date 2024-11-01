@@ -1,5 +1,5 @@
 import { privateKeyToAccount } from 'viem/accounts'
 
-const privateKey = '0x2a227235514c6334f9b88aa4088e1dbb1e3d1a5ee23053ff2a26a4ae9f51b7a1'
+const privateKey = '0x737d2cf1db940b966eb0d7e87521b88dabf9b2a444ee9815fcaf8d0746167a42'
 const account = privateKeyToAccount(privateKey)
 console.log('Endereço:', account.address)

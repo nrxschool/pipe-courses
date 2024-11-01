@@ -1,14 +1,15 @@
 // 1. Instale e importe a biblioteca Viem
-import { createPublicClient, http } from 'viem';
-import { mainnet } from 'viem/chains';
+import { createPublicClient, http } from "viem";
+import { anvil } from "viem/chains";
 import readline from "readline";
 
 // 2. Configure o provider
 const client = createPublicClient({
-  chain: mainnet,
-  transport: http('http://127.0.0.1:8545'),
+  chain: anvil,
+  transport: http(),
 });
-const daiAbi = [
+
+const abi = [
   {
     constant: true,
     inputs: [{ name: "_owner", type: "address" }],
@@ -42,8 +43,8 @@ const askForAccountAddress = (contractAddress) => {
 const checkBalance = async (contractAddress, accountAddress) => {
   const balance = await client.readContract({
     address: contractAddress,
-    abi: daiAbi,
-    functionName: 'balanceOf',
+    abi: abi,
+    functionName: "balanceOf",
     args: [accountAddress],
   });
 

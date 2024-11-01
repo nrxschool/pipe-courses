@@ -47,7 +47,7 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 
 ## Módulo 5 [Viem v2.x]
 
-- 🆗 [aula 1: Como criar carteiras](./mod5/aulas/aula1/roteiro.md)
+- ✅ [aula 1: Como criar carteiras](./mod5/aulas/aula1/roteiro.md)
 - 🆗 [aula 2: Lendo saldos da blockchain](./mod5/aulas/aula2/roteiro.md)
 - 🆗 [aula 3: Lendo dados de transações](./mod5/aulas/aula3/roteiro.md)
 - 🆗 [aula 4: Lendo dados de blocos](./mod5/aulas/aula4/roteiro.md)

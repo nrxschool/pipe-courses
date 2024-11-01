@@ -14,12 +14,6 @@ const rl = readline.createInterface({
 
 rl.question("Digite o endereço da conta: ", async (address) => {
   console.log("Endereço fornecido:", address);
-  // Verifica se o endereço é válido
-  if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
-    console.error("Endereço inválido. Certifique-se de que o endereço está no formato correto.");
-    rl.close();
-    return;
-  }
 
   try {
     const balance = await client.getBalance({ address });
