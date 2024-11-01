@@ -1,10 +1,10 @@
 // 1. Instale e importe a biblioteca Viem
-import { createPublicClient, http } from 'viem';
+import { createPublicClient, http } from "viem";
 import readline from "readline";
 
 // 2. Configure o client
 const client = createPublicClient({
-  transport: http('http://127.0.0.1:8545'),
+  transport: http("http://127.0.0.1:8545"),
 });
 
 async function main() {
@@ -25,18 +25,29 @@ async function main() {
       } else {
         try {
           console.log(`Obtendo bloco para o hash: ${answer}`);
-          const block = await client.getBlock(answer); // Obtém o bloco pelo hash
+          const block = await client.getBlock({
+            blockHash: answer,
+            includeTransactions: true,
+          }); // Obtém o bloco pelo hash
           if (!block) {
             console.log("Bloco não encontrado para o hash fornecido.");
             return;
           }
+
+          const txCount = block.transactions.length;
+          console.log(`This block has ${txCount} Transaction`);
+
+          const txHashes = block.transactions.map((txHash) => txHash);
+          console.log(txHashes);
+
+          /*
+           
+          const transaction = await publicClient.getTransaction({
+             blockHash: 'answer',
+             index: 0
+           })
           
-          const txCount = block.transactions.length; // Conta as transações no bloco
-          console.log(`This block hash ${txCount} Transaction`);
-          
-          // Exibe apenas os hashes das transações do bloco em formato de array
-          const txHashes = block.transactions.map(txHash => txHash); // Mapeia os hashes das transações
-          console.log(txHashes); // Exibe os hashes como um array
+          */
         } catch (error) {
           console.error("Erro ao obter o bloco ou transação:", error.message);
         }
