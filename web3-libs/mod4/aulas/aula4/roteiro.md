@@ -16,7 +16,7 @@ Olá! Bem-vindo à nossa quarta aula sobre Ethers v4. Nesta aula, vamos explorar
 
 Para acessar informações de blocos, o Ethers nos fornece métodos como `getBlock` e `getBlockNumber`. Vamos ver como utilizá-los:
 
-- [Buscando Blocos](../../playground/aula4/getBlock.js)
+- [Buscando Blocos](../../../playground/aula4/getBlock.js)
 
 Esses métodos retornam informações detalhadas, como o número do bloco, timestamp, hash, minerador e o total de transações, entre outros. Isso permite analisar tanto o bloco mais recente quanto blocos específicos para entender melhor o histórico da blockchain.
 
@@ -24,7 +24,7 @@ Esses métodos retornam informações detalhadas, como o número do bloco, times
 
 Para investigar transações em um bloco específico, o Ethers oferece métodos que facilitam o acesso a contagens e detalhes das transações em qualquer bloco:
 
-- [Buscando Transações por Blocos](../../playground/aula4/getTxFromBlock.js)
+- [Buscando Transações por Blocos](../../../playground/aula4/getTxFromBlock.js)
 
 Nesse exemplo, especificamos o hash do bloco e o índice da transação dentro do bloco para buscar uma transação específica. Isso é útil para rastrear transações individuais dentro de blocos conhecidos.
 
@@ -32,7 +32,7 @@ Nesse exemplo, especificamos o hash do bloco e o índice da transação dentro d
 
 Os blocos na blockchain Ethereum possuem diferentes estados conforme sua validação e segurança na rede. Podemos buscar blocos em diferentes estados, como:
 
-- [Direntes Estados de um Bloco](../../playground/aula4/getBlockState.js)
+- [Direntes Estados de um Bloco](../../../playground/aula4/getBlockState.js)
 
 Esses estados de bloco são úteis para entender a validade e segurança dos dados em cada estágio. Por exemplo, blocos “finalizados” ou “seguros” têm maior confiabilidade para análise e monitoramento de dados críticos, enquanto blocos “pendentes” estão ainda aguardando confirmação na rede.
 

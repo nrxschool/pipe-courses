@@ -19,7 +19,7 @@ Ao final desta aula, você será capaz de consultar saldos e convertê-los em di
 
 Para interagir com a blockchain, é necessário se conectar a um **provider**. O provider atua como um canal entre o seu código e a blockchain, e hoje usaremos o Infura para configurar nosso provedor.
 
-- [Conectar com um Provider](../playground/aula2/connect.py)
+- [Conectar com um Provider](../../playground/aula2/connect.py)
 
 ---
 
@@ -27,7 +27,7 @@ Para interagir com a blockchain, é necessário se conectar a um **provider**. O
 
 Com a conexão configurada, podemos ler o saldo de qualquer endereço na blockchain. Os saldos de contas Ethereum são armazenados em **wei** por padrão, que é a menor unidade de Ether.
 
-- [Obter o Saldo de uma endereço](../playground/aula2/balance_of.py)
+- [Obter o Saldo de uma endereço](../../playground/aula2/balance_of.py)
 
 ---
 
@@ -35,7 +35,7 @@ Com a conexão configurada, podemos ler o saldo de qualquer endereço na blockch
 
 Os valores de saldo são retornados em **wei**, mas geralmente é mais útil exibi-los em **ether** ou **gwei**. A Web3.py facilita essa conversão com métodos de utilidade. Podemos converter o saldo para ether e exibi-lo em uma unidade mais amigável.
 
-- [Exemplo de Conversão](../playground/aula2/convert_wei.py)
+- [Exemplo de Conversão](../../playground/aula2/convert_wei.py)
 
 ### Unidades de Conversão Comuns
 
@@ -71,7 +71,7 @@ Para obter o saldo de um token ERC-20, precisamos conectar-se ao contrato do tok
 
 Neste exemplo, estamos convertendo o saldo de DAI para **ether** (o que representa uma unidade decimal ajustada para tokens ERC-20), mas a unidade depende do contrato do token.
 
-- [Obter Saldo de ERC20](../playground/aula2/balance_of_erc20.py)
+- [Obter Saldo de ERC20](../../playground/aula2/balance_of_erc20.py)
 
 ---
 

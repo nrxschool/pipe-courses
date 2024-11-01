@@ -66,7 +66,7 @@ Neste exemplo:
 
 ## 3. Como obter e interpretar um ABI
 
-- [Compilar ERC20](../playground/aula2/erc20.sol)
+- [Compilar ERC20](../../playground/aula2/erc20.sol)
 
 ```bash
 forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --root .
@@ -76,7 +76,7 @@ forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d23
 
 Agora que entendemos o que é um ABI e como ele é estruturado, vamos usá-lo no Ethers.js para criar uma instância de contrato e interagir com ele. Para isso, precisamos do **endereço do contrato** e do **ABI**.
 
-- [Conectando a um Contrato](../../playground/aula6/abiContract.js)
+- [Conectando a um Contrato](../../../playground/aula6/abiContract.js)
 
 ## Conclusão
 

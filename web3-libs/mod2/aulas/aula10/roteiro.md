@@ -20,13 +20,13 @@ Eventos globais na EVM (Ethereum Virtual Machine) incluem a mineração de novos
 
 A subscrição ao evento `newBlockHeaders` permite que você seja notificado assim que um novo bloco é minerado. O código a seguir demonstra como monitorar novos blocos:
 
-- [Ouvindo novos blocos](../playground/aula10/newBlocks.js)
+- [Ouvindo novos blocos](../../playground/aula10/newBlocks.js)
 
 ### Monitorando novas transações
 
 Para monitorar todas as transações na rede, você pode assinar o evento `pendingTransactions`. Isso permitirá capturar transações antes que sejam incluídas em blocos.
 
-- [Ouvindo novas transações](../playground/aula10/newTx.js)
+- [Ouvindo novas transações](../../playground/aula10/newTx.js)
 
 Esses métodos de monitoramento são muito úteis para aplicações que precisam agir imediatamente após a mineração de novos blocos ou a criação de transações pendentes, como bots de arbitragem.
 
@@ -38,7 +38,7 @@ Podemos monitorar eventos específicos de um contrato, como o evento `Transfer` 
 
 Para monitorar eventos de transferência de um token ERC20, primeiro criamos uma instância do contrato e, em seguida, subscrevemos ao evento `Transfer`.
 
-- [Ouvindo ERC20](../playground/aula10/newEventERC20.js)
+- [Ouvindo ERC20](../../playground/aula10/newEventERC20.js)
 
 Neste exemplo:
 
@@ -55,7 +55,7 @@ Podemos implementar uma lógica para monitorar transferências que envolvem pess
 
 Suponha que temos uma lista de endereços de PPEs. Quando uma transferência para um desses endereços é detectada, o sistema automaticamente envia uma transação de estorno para o remetente, devolvendo o valor transferido.
 
-- [Ouvindo e filtrando eventos](../playground/aula10/listener.js)
+- [Ouvindo e filtrando eventos](../../playground/aula10/listener.js)
 
 Neste código:
 

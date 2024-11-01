@@ -17,7 +17,7 @@ Bem-vindo à terceira aula sobre a biblioteca **Web3.py**. Hoje, vamos aprender 
 
 O primeiro passo para ler uma transação é saber como acessá-la através de seu **hash**, que é um identificador único gerado após cada transação. Vamos usar o método `get_transaction`.
 
-- [Buscando uma transação](../playground/aula3/get_transaction.py)
+- [Buscando uma transação](../../playground/aula3/get_transaction.py)
 
 ### Dados Retornados
 
@@ -47,7 +47,7 @@ Depois de acessar uma transação, podemos examinar cada campo. Esses dados são
 
 Um recibo de transação contém informações detalhadas sobre o que aconteceu após a execução da transação. O método `get_transaction_receipt` fornece detalhes como status e consumo total de gás.
 
-- [Buscando o Recibo de uma Transação](../playground/aula3/get_transaction_receipt.py)
+- [Buscando o Recibo de uma Transação](../../playground/aula3/get_transaction_receipt.py)
 
 ### Dados do Recibo
 
@@ -64,7 +64,7 @@ Campos importantes no recibo:
 
 Os **logs** são eventos emitidos por contratos durante a execução de uma transação. Eles são úteis para entender interações específicas e dados gerados pelos contratos.
 
-- [Lendo Logs da Transação](../playground/aula3/get_transaction_logs.py)
+- [Lendo Logs da Transação](../../playground/aula3/get_transaction_logs.py)
 
 ### Estrutura dos Logs
 

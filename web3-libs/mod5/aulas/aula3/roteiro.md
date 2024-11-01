@@ -17,7 +17,7 @@ Bem-vindo à terceira aula sobre a biblioteca **Viem**. Hoje, vamos aprender a e
 
 O primeiro passo para ler uma transação é saber como acessá-la através de seu **hash**, que é um identificador único gerado após cada transação. Vamos usar o método `getTransaction`.
 
-- [Buscando uma transação](../../playground/aula3/getTransaction.js)
+- [Buscando uma transação](../../../playground/aula3/getTransaction.js)
 
 ### Dados Retornados
 
@@ -35,7 +35,7 @@ O método `getTransaction` retorna vários dados importantes, como:
 
 Um recibo de transação contém informações detalhadas sobre o que aconteceu após a execução da transação. O método `getTransactionReceipt` fornece detalhes como status e consumo total de gás.
 
-- [Buscando o Recibo de uma Transação](../../playground/aula3/getTransactionReceipt.js)
+- [Buscando o Recibo de uma Transação](../../../playground/aula3/getTransactionReceipt.js)
 
 ### Dados do Recibo
 

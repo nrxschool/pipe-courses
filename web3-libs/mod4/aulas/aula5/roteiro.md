@@ -32,7 +32,7 @@ Esse processo é totalmente descentralizado, o que significa que a transação p
 
 ## 3. Executando e Verificando a Transação
 
-- [Enviando Transação](../../playground/aula5/sendTx.js)
+- [Enviando Transação](../../../playground/aula5/sendTx.js)
 
 ## Conclusão
 

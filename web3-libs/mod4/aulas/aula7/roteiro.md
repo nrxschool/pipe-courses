@@ -42,7 +42,7 @@ O método `transfer` permite que uma conta envie tokens diretamente para outra, 
 
 > 0x11 Overflow/Underflow
 
-- [Transferindo Tokens](../../../playground/aula7/transfer.js)
+- [Transferindo Tokens](../../../../playground/aula7/transfer.js)
 
 ## 3. Método `approve`: Autorizando Transferências
 
@@ -57,7 +57,7 @@ O método `approve` permite que o proprietário de uma conta autorize outra cont
 
 > **Atenção**: Definir permissões muito altas pode ser arriscado, pois o “spender” terá mais controle sobre os tokens do proprietário.
 
-- [Provando e Conferindo Permissão](../../playground/aula7/approve.js)
+- [Provando e Conferindo Permissão](../../../playground/aula7/approve.js)
 
 ## 4. Método `transferFrom`: Transferindo Tokens Aprovados
 
@@ -73,7 +73,7 @@ Depois que uma conta é aprovada para gastar tokens, ela pode usar o método `tr
 
 > **Lembre-se**: O limite pode ser ajustado ou redefinido pelo usuário a qualquer momento para mais segurança.
 
-- [Transferindo Tokens de terceiros](../../playground/aula7/transferFrom.js)
+- [Transferindo Tokens de terceiros](../../../playground/aula7/transferFrom.js)
 
 ## Conclusão
 
