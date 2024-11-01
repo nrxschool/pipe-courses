@@ -17,10 +17,7 @@ const rl = readline.createInterface({
 rl.question("Digite o hash da transação: ", async (txHash) => {
   try {
     console.log("Buscando transação para o hash:", txHash);
-    const transaction = await client.getTransactionReceipt({ hash: txHash });
-    
-    // Log para verificar o que está sendo retornado
-    console.log("Resposta da transação:", transaction);
+    const transaction = await client.getTransactionReceipt({ hash: txHash,  });
 
     // Verifique se a transação foi encontrada
     if (!transaction) {

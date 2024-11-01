@@ -4,13 +4,20 @@
 
 Bem-vindo à terceira aula sobre a biblioteca **Viem**. Hoje, vamos aprender a extrair informações detalhadas de transações na blockchain. Entender os dados das transações é essencial para monitorar, validar e auditar interações, além de ser uma base importante para desenvolvimento e análise de smart contracts. Nesta aula, vamos explorar os métodos que a **Viem** nos oferece para consultar e analisar transações específicas.
 
+### Programa da aula:
+
+1. Obtendo uma transação pelo hash
+2. Analisando os dados da transação
+3. Lendo o recibo de uma transação
+4. Analisando logs no recibo
+
 ---
 
 ## 1. Obtendo uma Transação pelo Hash
 
 O primeiro passo para ler uma transação é saber como acessá-la através de seu **hash**, que é um identificador único gerado após cada transação. Vamos usar o método `getTransaction`.
 
-- [Buscando uma transação](../playground/aula3/getTransaction.js)
+- [Buscando uma transação](../../playground/aula3/getTransaction.js)
 
 ### Dados Retornados
 
@@ -28,7 +35,7 @@ O método `getTransaction` retorna vários dados importantes, como:
 
 Um recibo de transação contém informações detalhadas sobre o que aconteceu após a execução da transação. O método `getTransactionReceipt` fornece detalhes como status e consumo total de gás.
 
-- [Buscando o Recibo de uma Transação](../playground/aula3/getTransactionReceipt.js)
+- [Buscando o Recibo de uma Transação](../../playground/aula3/getTransactionReceipt.js)
 
 ### Dados do Recibo
 

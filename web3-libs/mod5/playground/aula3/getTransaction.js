@@ -18,9 +18,7 @@ rl.question("Digite o hash da transação: ", async (txHash) => {
   try {
     console.log("Buscando transação para o hash:", txHash);
     const transaction = await client.getTransaction({ hash: txHash });
-    
-    // Log para verificar o que está sendo retornado
-    console.log("Resposta da transação:", transaction);
+  
 
     // Verifique se a transação foi encontrada
     if (!transaction) {
