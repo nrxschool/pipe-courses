@@ -42,7 +42,7 @@ async function main() {
 
           /*
            
-          const transaction = await publicClient.getTransaction({
+          const transaction = await client.getTransaction({
              blockHash: 'answer',
              index: 0
            })

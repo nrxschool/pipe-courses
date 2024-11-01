@@ -1,40 +1,25 @@
 // 1. Instale e importe a biblioteca Viem
-import { createPublicClient, http } from 'viem';
+import { createPublicClient, http } from "viem";
+import { anvil } from "viem/chains";
 
 // 2. Configure o client
-export const client = createPublicClient({
-  transport: http('http://127.0.0.1:8545'),
+const client = createPublicClient({
+  transport: http(),
+  chain: anvil
 });
 
-const viemClient = client;
+async function fetchBlocks() {
+  const blockTypes = ["earliest", "latest", "pending", "finalized", "safe"];
+  const blocks = [];
+  
+  for (const type of blockTypes) {
+    const block = await client.getBlock({blockTag: type});
+    blocks.push({
+      Type: type.toUpperCase(),
+      Block: block.number
+    });
+  }
+  console.table(blocks);
+}
 
-viemClient.getBlock("earliest").then((block) => {
-  console.log("================================================");
-  console.log("EARLIEST BLOCK");
-  console.log("================================================");
-  console.log(block);
-});
-viemClient.getBlock("latest").then((block) => {
-  console.log("================================================");
-  console.log("LATEST BLOCK");
-  console.log("================================================");
-  console.log(block);
-});
-viemClient.getBlock("pending").then((block) => {
-  console.log("================================================");
-  console.log("PENDING BLOCK");
-  console.log("================================================");
-  console.log(block);
-});
-viemClient.getBlock("finalized").then((block) => {
-  console.log("================================================");
-  console.log("FINALIZED BLOCK");
-  console.log("================================================");
-  console.log(block);
-});
-viemClient.getBlock("safe").then((block) => {
-  console.log("================================================");
-  console.log("SAFE BLOCK");
-  console.log("================================================");
-  console.log(block);
-});
+fetchBlocks();

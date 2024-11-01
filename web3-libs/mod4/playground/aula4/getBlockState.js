@@ -7,14 +7,16 @@ const provider = new ethers.JsonRpcProvider(RPC_URL);
 
 async function getBlocks() {
   const blockTypes = ["earliest", "latest", "pending", "finalized", "safe"];
+  const blocks = [];
   
   for (const type of blockTypes) {
     const block = await provider.getBlock(type);
-    console.log("================================================");
-    console.log(`${type.toUpperCase()} BLOCK`);
-    console.log("================================================");
-    console.log(block);
+    blocks.push({
+      Type: type.toUpperCase(),
+      Block: block.number
+    });
   }
+  console.table(blocks);
 }
 
 getBlocks();
