@@ -76,7 +76,8 @@ forge create aula2/erc20.sol:MyToken --private-key 0xac0974bec39a17e36ba4a6b4d23
 
 Agora que entendemos o que é um ABI e como ele é estruturado, vamos usá-lo no Viem para criar uma instância de contrato e interagir com ele. Para isso, precisamos do **endereço do contrato** e do **ABI**.
 
-- [Conectando a um Contrato](../../playground/aula6/abiContract.v1.js)
+- [Conectando a um Contrato V1](../../playground/aula6/abiContract.v1.js)
+- [Conectando a um Contrato V2](../../playground/aula6/abiContract.v2.js)
 
 ## Conclusão
 
