@@ -10,18 +10,12 @@ import { privateKeyToAccount } from "viem/accounts";
 import { anvil } from "viem/chains";
 import abi from "./abi.js";
 
-const ALICE_PRIVATE_KEY =
-  "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
-const BOB_PRIVATE_KEY =
-  "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d";
-
 const ALICE_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 const BOB_ADDRESS = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
 const EVE_ADDRESS = "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC";
-const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const aliceContractConnection = getContract({
-  address: CONTRACT_ADDRESS,
+  address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   abi: abi,
   client: {
     public: createPublicClient({
@@ -31,13 +25,15 @@ const aliceContractConnection = getContract({
     wallet: createWalletClient({
       chain: anvil,
       transport: http(),
-      account: privateKeyToAccount(ALICE_PRIVATE_KEY),
+      account: privateKeyToAccount(
+        "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+      ),
     }),
   },
 });
 
 const bobContractConnection = getContract({
-  address: CONTRACT_ADDRESS,
+  address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   abi: abi,
   client: {
     public: createPublicClient({
@@ -47,7 +43,9 @@ const bobContractConnection = getContract({
     wallet: createWalletClient({
       chain: anvil,
       transport: http(),
-      account: privateKeyToAccount(BOB_PRIVATE_KEY),
+      account: privateKeyToAccount(
+        "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
+      ),
     }),
   },
 });
