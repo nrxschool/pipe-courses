@@ -48,10 +48,10 @@ Ensinar o básico sobre a integração de sistemas web2 com web3
 ## Módulo 5 [Viem v2.x]
 
 - ✅ [aula 1: Como criar carteiras](./mod5/aulas/aula1/roteiro.md)
-- 🆗 [aula 2: Lendo saldos da blockchain](./mod5/aulas/aula2/roteiro.md)
-- 🆗 [aula 3: Lendo dados de transações](./mod5/aulas/aula3/roteiro.md)
-- 🆗 [aula 4: Lendo dados de blocos](./mod5/aulas/aula4/roteiro.md)
-- 🆗 [aula 5: Como criar transações simples (envio de Ether)](./mod5/aulas/aula5/roteiro.md)
+- ✅ [aula 2: Lendo saldos da blockchain](./mod5/aulas/aula2/roteiro.md)
+- ✅ [aula 3: Lendo dados de transações](./mod5/aulas/aula3/roteiro.md)
+- ✅ [aula 4: Lendo dados de blocos](./mod5/aulas/aula4/roteiro.md)
+- ✅ [aula 5: Como criar transações simples (envio de Ether)](./mod5/aulas/aula5/roteiro.md)
 - 🆗 [aula 6: O que são ABIs](./mod5/aulas/aula6/roteiro.md)
 - 🆗 [aula 7: Como escrever dados no contrato (envio de ERC20)](./mod5/aulas/aula7/roteiro.md)
 - 🆗 [aula 8: Como ler dados complexos do contrato (Struct, Enum e Array)](./mod5/aulas/aula8/roteiro.md)

@@ -1,4 +1,4 @@
-import { createPublicClient, http } from "viem";
+import { createPublicClient, formatUnits, http } from "viem";
 import { anvil } from "viem/chains";
 import abi from "./abi.js";
 
@@ -33,7 +33,7 @@ async function fetchContractData() {
     console.table({
       tokenName,
       accountAddress,
-      balance: balance.toString(),
+      balance: formatUnits(balance, 18)
     });
   } catch (error) {
     console.error("Erro ao consultar o contrato:", error);
